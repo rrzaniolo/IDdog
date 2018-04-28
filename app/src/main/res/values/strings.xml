@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">IDdog</string>
+
+    <!-- Login Activity -->
+    <string name="aLogin_title">The #IDDOG#</string>
+    <string name="aLogin_email">your email</string>
 </resources>
