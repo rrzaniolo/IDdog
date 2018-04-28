@@ -1,4 +1,4 @@
-package rrzaniolo.iddog;
+package rrzaniolo.iddog.LiveEvents;
 
 /*
   Created by Rodrigo Rodrigues Zaniolo on 4/28/2018.
@@ -11,7 +11,7 @@ import android.support.annotation.Nullable;
 import android.support.annotation.StringRes;
 
 /**
- * A rrzaniolo.iddog.SingleLiveEvent used for Snackbar messages. Like a {@link SingleLiveEvent} but also prevents
+ * A rrzaniolo.iddog.LiveEvents.SingleLiveEvent used for Snackbar messages. Like a {@link SingleLiveEvent} but also prevents
  * null messages and uses a custom observer.
  * <p>
  * Note that only one observer is going to be notified of changes.
@@ -32,8 +32,8 @@ public class SnackbarMessage extends SingleLiveEvent<Integer> {
     public interface SnackbarObserver {
         /**
          * Called when there is a new message to be shown.
-         * @param snackbarMessageResourceId The new message, non-null.
+         * @param messageResourceId The new message, non-null.
          */
-        void onNewMessage(@StringRes int snackbarMessageResourceId);
+        void onNewMessage(@StringRes int messageResourceId);
     }
 }

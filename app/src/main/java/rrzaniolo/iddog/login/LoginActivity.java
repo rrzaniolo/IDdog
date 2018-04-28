@@ -7,7 +7,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 
 import rrzaniolo.iddog.R;
-import rrzaniolo.iddog.SnackbarMessage;
+import rrzaniolo.iddog.LiveEvents.SnackbarMessage;
 import rrzaniolo.iddog.ViewModelFactory;
 import rrzaniolo.iddog.databinding.ActivityLoginBinding;
 import rrzaniolo.iddog.utils.SnackbarUtils;
@@ -62,20 +62,25 @@ public class LoginActivity extends AppCompatActivity {
 
     //region --- Private Methods ---
     private void setUpSnackBar(){
-        checkNotNull(getViewModel());
+        try {
+            checkNotNull(getViewModel());
+            checkNotNull(getViewModel().getSnackbarMessage());
 
-        getViewModel().getSnackbarMessage().observe(LoginActivity.this, new SnackbarMessage.SnackbarObserver() {
-            @Override
-            public void onNewMessage(int snackbarMessageResourceId) {
-                try {
-                    checkNotNull(getBinding());
-                    checkNotNull(getBinding().getRoot());
-                    SnackbarUtils.showSnackbar(getBinding().getRoot(), getString(snackbarMessageResourceId));
-                }catch (NullPointerException e) {
-                    Log.e(TAG, e.getLocalizedMessage());
+            getViewModel().getSnackbarMessage().observe(LoginActivity.this, new SnackbarMessage.SnackbarObserver() {
+                @Override
+                public void onNewMessage(int messageResourceId) {
+                    try {
+                        checkNotNull(getBinding());
+                        checkNotNull(getBinding().getRoot());
+                        SnackbarUtils.showSnackbar(getBinding().getRoot(), getString(messageResourceId));
+                    } catch (NullPointerException e) {
+                        Log.e(TAG, e.getLocalizedMessage());
+                    }
                 }
-            }
-        });
+            });
+        }catch(NullPointerException e){
+            Log.e(TAG, e.getLocalizedMessage());
+        }
     }
     //endregion
 }

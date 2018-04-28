@@ -6,8 +6,7 @@ import android.support.annotation.NonNull;
 import android.view.View;
 
 import rrzaniolo.iddog.R;
-import rrzaniolo.iddog.SnackbarMessage;
-import rrzaniolo.iddog.utils.SnackbarUtils;
+import rrzaniolo.iddog.LiveEvents.SnackbarMessage;
 
 /**
  * Created by Rodrigo Rodrigues Zaniolo on 4/28/2018.
