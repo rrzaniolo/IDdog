@@ -1,40 +1,78 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+
+<layout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/coordinatorLayout"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical">
+    xmlns:tools="http://schemas.android.com/tools">
 
-    <TextView
-        android:id="@id/aLogin_tvTitle"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="16dp"
-        android:layout_marginStart="16dp"
-        android:text="@string/aLogin_title"
-        android:textSize="24sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:layout_conversion_absoluteHeight="32dp"
-        tools:layout_conversion_absoluteWidth="146dp"
-        tools:text="@string/aLogin_title" />
+    <data>
 
-    <EditText
-        android:id="@id/aLogin_etEmail"
-        android:layout_width="wrap_content"
-        android:layout_height="0dp"
-        android:layout_marginBottom="7dp"
-        android:background="@color/transparent"
-        android:hint="@string/aLogin_email"
-        android:inputType="textEmailAddress"
-        app:layout_constraintBottom_toBottomOf="@+id/aLogin_tvTitle"
-        app:layout_constraintStart_toStartOf="@+id/aLogin_tvTitle"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:layout_conversion_absoluteHeight="25dp"
-        tools:layout_conversion_absoluteWidth="83dp" />
+        <variable
+            name="viewModel"
+            type="rrzaniolo.iddog.login.LoginViewModel"/>
+    </data>
 
-</android.support.constraint.ConstraintLayout>
+    <android.support.constraint.ConstraintLayout
+        android:id="@+id/coordinatorLayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@id/aLogin_tvTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/aLogin_tvTitle_marginTop"
+            android:layout_marginStart="@dimen/aLogin_tvTitle_marginStart"
+            android:layout_marginEnd="@dimen/aLogin_tvTitle_marginEnd"
+            android:text="@string/aLogin_title"
+            android:textSize="@dimen/aLogin_tvTitle_textSize"
+            android:textColor="@color/colorPrimaryDark"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:layout_conversion_absoluteHeight="32dp"
+            tools:layout_conversion_absoluteWidth="146dp"
+            tools:text="@string/aLogin_title" />
+
+        <EditText
+            android:id="@id/aLogin_etEmail"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/aLogin_etEmail_marginTop"
+            android:layout_marginBottom="@dimen/aLogin_etEmail_marginBottom"
+            android:layout_marginStart="@dimen/aLogin_etEmail_marginStart"
+            android:layout_marginEnd="@dimen/aLogin_etEmail_marginEnd"
+            android:background="@color/transparent"
+            android:text="rrzaniolo@gmail.com"
+            android:hint="@string/aLogin_email"
+            android:inputType="textEmailAddress"
+            android:textColor="@color/purplishBlue"
+            android:textColorHint="@color/purple"
+            android:textSize="@dimen/aLogin_etEmail_textSize"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            tools:layout_conversion_absoluteHeight="25dp"
+            tools:layout_conversion_absoluteWidth="83dp" />
+
+        <Button
+            android:id="@id/aLogin_btnLogin"
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:layout_marginTop="@dimen/aLogin_btnLogin_marginTop"
+            android:layout_marginStart="@dimen/aLogin_btnLogin_marginStart"
+            android:layout_marginEnd="@dimen/aLogin_btnLogin_marginEnd"
+            android:background="@drawable/btn_login"
+            android:text="@string/aLogin_button"
+            android:textColor="@color/white"
+            android:enabled="true"
+            android:textSize="@dimen/aLogin_btnLogin_textSize"
+            android:onClick="@{viewModel.onLogin}"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/aLogin_etEmail" />
+
+    </android.support.constraint.ConstraintLayout>
+</layout>

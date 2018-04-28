@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!-- Login Activity -->
+    <dimen name="aLogin_tvTitle_marginTop">16dp</dimen>
+    <dimen name="aLogin_tvTitle_marginStart">16dp</dimen>
+    <dimen name="aLogin_tvTitle_marginEnd">16dp</dimen>
+    <dimen name="aLogin_tvTitle_textSize">36sp</dimen>
+
+    <dimen name="aLogin_etEmail_marginTop">24dp</dimen>
+    <dimen name="aLogin_etEmail_marginBottom">16dp</dimen>
+    <dimen name="aLogin_etEmail_marginStart">16dp</dimen>
+    <dimen name="aLogin_etEmail_marginEnd">16dp</dimen>
+    <dimen name="aLogin_etEmail_textSize">22sp</dimen>
+
+    <dimen name="aLogin_btnLogin_marginTop">32dp</dimen>
+    <dimen name="aLogin_btnLogin_marginBottom">16dp</dimen>
+    <dimen name="aLogin_btnLogin_marginStart">16dp</dimen>
+    <dimen name="aLogin_btnLogin_marginEnd">16dp</dimen>
+    <dimen name="aLogin_btnLogin_textSize">16sp</dimen>
+</resources>
