@@ -7,7 +7,9 @@ package rrzaniolo.iddog.utils;
 public class Constants {
 
     //region --- API ---
-    public static String BASE_URL = "https://iddog-api.now.sh/";
+    public static String BASE_URL   = "https://iddog-api.now.sh/";
+    public static String LOGIN_URL  = "signup";
+    public static String FEED_URL   = "feed";
 
     public static String CATEGORY_HUSKY     = "husky";
     public static String CATEGORY_LABRADOR  = "labrador";

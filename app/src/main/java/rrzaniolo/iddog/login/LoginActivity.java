@@ -2,14 +2,17 @@ package rrzaniolo.iddog.login;
 
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 
+import rrzaniolo.iddog.LiveEvents.LoadingDialog;
 import rrzaniolo.iddog.R;
 import rrzaniolo.iddog.LiveEvents.SnackbarMessage;
 import rrzaniolo.iddog.ViewModelFactory;
 import rrzaniolo.iddog.databinding.ActivityLoginBinding;
+import rrzaniolo.iddog.utils.LoadingDialogUtils;
 import rrzaniolo.iddog.utils.SnackbarUtils;
 
 import static rrzaniolo.iddog.utils.Preconditions.checkNotNull;
@@ -57,22 +60,38 @@ public class LoginActivity extends AppCompatActivity {
         setBinding();
         getBinding().setViewModel(getViewModel());
         setUpSnackBar();
+        setUpLoadingDialog();
     }
     //endregion
 
     //region --- Private Methods ---
     private void setUpSnackBar(){
         try {
-            checkNotNull(getViewModel());
-            checkNotNull(getViewModel().getSnackbarMessage());
-
-            getViewModel().getSnackbarMessage().observe(LoginActivity.this, new SnackbarMessage.SnackbarObserver() {
+            checkNotNull(checkNotNull(getViewModel().getSnackbarMessage()))
+                    .observe(LoginActivity.this, new SnackbarMessage.SnackbarObserver() {
                 @Override
                 public void onNewMessage(int messageResourceId) {
                     try {
-                        checkNotNull(getBinding());
-                        checkNotNull(getBinding().getRoot());
-                        SnackbarUtils.showSnackbar(getBinding().getRoot(), getString(messageResourceId));
+                        SnackbarUtils.showSnackbar(checkNotNull(checkNotNull(getBinding()).getRoot()), getString(messageResourceId));
+                    } catch (NullPointerException e) {
+                        Log.e(TAG, e.getLocalizedMessage());
+                    }
+                }
+            });
+        }catch(NullPointerException e){
+            Log.e(TAG, e.getLocalizedMessage());
+        }
+    }
+
+    private void setUpLoadingDialog(){
+        try {
+            checkNotNull(checkNotNull(getViewModel()).getLoadingDialog())
+                    .observe(LoginActivity.this, new LoadingDialog.LoadingDialogObserver() {
+
+                @Override
+                public void onVisibilityChange(@NonNull Boolean isVisible) {
+                    try {
+                        LoadingDialogUtils.changeLoadingDialogVisibility(checkNotNull(checkNotNull(getBinding()).getRoot()), isVisible);
                     } catch (NullPointerException e) {
                         Log.e(TAG, e.getLocalizedMessage());
                     }
