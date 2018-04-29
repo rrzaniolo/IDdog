@@ -37,6 +37,20 @@ ext {
     rulesVersion = '1.0.1'
     espressoVersion = '3.0.2'
     constraintLayout = '1.1.0'
+    glideVersion = '3.7.0'
+
+    // Rx Libraries - Reactive Programming.
+    rxJava2Version = '2.0.9'
+    rxAndroid2Version = '2.0.1'
+
+    // Network Libraries.
+    retrofitVersion = '2.3.0'
+    retrofitOkhttp = '3.6.0'
+
+    // Google API
+    gsonVersion = '2.8.0'
+    playServicesVersion = '11.0.2'
+
 
     // Architecture Components dependencies
     roomVersion = "1.0.0"

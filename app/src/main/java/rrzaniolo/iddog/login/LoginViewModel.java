@@ -7,6 +7,7 @@ import android.view.View;
 
 import rrzaniolo.iddog.R;
 import rrzaniolo.iddog.LiveEvents.SnackbarMessage;
+import rrzaniolo.iddog.network.RetrofitManager;
 
 /**
  * Created by Rodrigo Rodrigues Zaniolo on 4/28/2018.
@@ -42,14 +43,18 @@ public class LoginViewModel extends AndroidViewModel {
         return new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                signIn();
+                signIn(new RetrofitManager());
             }
         };
     }
     //endregion
 
     //region --- API CALL ---
-    private void signIn (){
-        showSnackbarMessage(R.string.em_apiSignIn);
+    private void signIn (RetrofitManager retrofitManager){
+        if(retrofitManager.hasInternetConnection(getApplication())){
+            showSnackbarMessage(R.string.em_noConnection);
+        }else{
+            showSnackbarMessage(R.string.em_apiSignIn);
+        }
     }
 }
