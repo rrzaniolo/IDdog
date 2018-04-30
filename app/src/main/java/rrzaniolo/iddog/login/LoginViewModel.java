@@ -21,12 +21,12 @@ import rrzaniolo.iddog.network.JsonObjectUtils;
 import rrzaniolo.iddog.network.entries.SignInResponse;
 import rrzaniolo.iddog.network.entries.User;
 import rrzaniolo.iddog.utils.Constants;
+import rrzaniolo.iddog.utils.RxUtils;
 import rrzaniolo.iddog.utils.SharedPreferencesUtils;
 
 import static rrzaniolo.iddog.utils.Preconditions.checkEmail;
 import static rrzaniolo.iddog.utils.Preconditions.checkNotNull;
 import static rrzaniolo.iddog.utils.Preconditions.isNotNullNorEmpty;
-import static rrzaniolo.iddog.utils.RxUtils.toObservable;
 
 /*
  * Created by Rodrigo Rodrigues Zaniolo on 4/28/2018.
@@ -42,6 +42,9 @@ public class LoginViewModel extends AndroidViewModel {
     //region --- Variables ---
     private final SnackbarMessage snackbarMessage = new SnackbarMessage();
     private final LoadingDialog loadingDialog = new LoadingDialog();
+    private final ConsumerService consumerService;
+    private final IConsumerService iConsumerService;
+    private final RxUtils rxUtils;
     private final String emailErrorMessage;
 
     private SharedPreferencesUtils prefUtils;
@@ -61,7 +64,19 @@ public class LoginViewModel extends AndroidViewModel {
         return loadingDialog;
     }
 
-    public String getEmailErrorMessage() {
+    private ConsumerService getConsumerService() {
+        return consumerService;
+    }
+
+    private IConsumerService getIConsumerService() {
+        return iConsumerService;
+    }
+
+    public RxUtils getRxUtils() {
+        return rxUtils;
+    }
+
+    private String getEmailErrorMessage() {
         return emailErrorMessage;
     }
 
@@ -110,9 +125,13 @@ public class LoginViewModel extends AndroidViewModel {
 
     //region --- Constructors ---
     public LoginViewModel(@NonNull Application application, SharedPreferencesUtils prefUtils,
-                          String emailErrorMessage) {
+                          ConsumerService consumerService, IConsumerService iConsumerService,
+                          RxUtils rxUtils, String emailErrorMessage) {
         super(application);
 
+        this.consumerService = consumerService;
+        this.iConsumerService = iConsumerService;
+        this.rxUtils = rxUtils;
         this.emailErrorMessage = emailErrorMessage;
 
         setPrefUtils(prefUtils);
@@ -126,8 +145,8 @@ public class LoginViewModel extends AndroidViewModel {
     @SuppressLint("CheckResult")
     private void setEmailValidation(){
         Observable.combineLatest(
-                toObservable(getEmail()),
-                toObservable(new ObservableField<>(true)),
+                getRxUtils().toObservable(getEmail()),
+                getRxUtils().toObservable(new ObservableField<>(true)),
                 (email, control) ->
                         checkEmail(email) && isNotNullNorEmpty(email)
                 ).subscribe(this::setIsEmailValid);
@@ -136,8 +155,8 @@ public class LoginViewModel extends AndroidViewModel {
     @SuppressLint("CheckResult")
     private void setEmailError(){
         Observable.combineLatest(
-                toObservable(getEmail()),
-                toObservable(new ObservableField<>(true)),
+                getRxUtils().toObservable(getEmail()),
+                getRxUtils().toObservable(new ObservableField<>(true)),
                 (email, control) ->
                         !checkEmail(email) && isNotNullNorEmpty(email)
         ).subscribe(this::setIsEmailError);
@@ -146,8 +165,8 @@ public class LoginViewModel extends AndroidViewModel {
     @SuppressLint("CheckResult")
     private void setErrorMessageDisplay(){
         Observable.combineLatest(
-                toObservable(getIsEmailError()),
-                toObservable(new ObservableField<>(true)),
+                getRxUtils().toObservable(getIsEmailError()),
+                getRxUtils().toObservable(new ObservableField<>(true)),
                 (isError, control) ->
                         isError
         ).subscribe(isError -> {
@@ -184,9 +203,11 @@ public class LoginViewModel extends AndroidViewModel {
         }
     }
 
-    private void performSingUp(IConsumerService instance){
+    private void performSingUp(){
         try {
-            instance.signIn(JsonObjectUtils.signInBody(checkNotNull(getEmail().get()))).enqueue(new Callback<SignInResponse>() {
+            getIConsumerService()
+                    .signIn(JsonObjectUtils.signInBody(checkNotNull(getEmail().get())))
+                    .enqueue(new Callback<SignInResponse>() {
                 @Override
                 public void onResponse(@NonNull Call<SignInResponse> call, @NonNull Response<SignInResponse> response) {
                     try {
@@ -219,15 +240,15 @@ public class LoginViewModel extends AndroidViewModel {
 
     //region --- Public Methods ---
     public View.OnClickListener onLogin(){
-        return v -> signUn(new ConsumerService());
+        return v -> signUp();
     }
     //endregion
 
     //region --- API CALL ---
-    private void signUn(ConsumerService consumerService){
-        if(consumerService.hasInternetConnection(getApplication())){
+    private void signUp(){
+        if(getConsumerService().hasInternetConnection(getApplication())){
             setLoadingDialogVisibility(true);
-            performSingUp(ConsumerService.getInstance(getApplication()));
+            performSingUp();
         }else{
             showSnackbarMessage(R.string.em_noConnection);
 

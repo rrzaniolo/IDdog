@@ -45,10 +45,18 @@ public class SharedPreferencesUtils {
         editor.apply();
     }
 
+    public String getString(String key){
+        return getSharedPreferences().getString(key, "");
+    }
+
     public void putInteger(String key, int value) {
         SharedPreferences.Editor editor = getSharedPreferences().edit();
         editor.putInt(key, value);
         editor.apply();
+    }
+
+    public int getInteger(String key){
+        return getSharedPreferences().getInt(key, -1);
     }
 
     public void putLong(String key, long value) {
@@ -57,10 +65,18 @@ public class SharedPreferencesUtils {
         editor.apply();
     }
 
+    public Long getLong(String key){
+        return getSharedPreferences().getLong(key, -1);
+    }
+
     public void putBoolean(String key, boolean value) {
         SharedPreferences.Editor editor = getSharedPreferences().edit();
         editor.putBoolean(key, value);
         editor.apply();
+    }
+
+    public void getBoolean(String key){
+        getSharedPreferences().getBoolean(key, false);
     }
 
     public void clear() {

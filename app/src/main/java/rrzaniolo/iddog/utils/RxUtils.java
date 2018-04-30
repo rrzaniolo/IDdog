@@ -12,13 +12,21 @@ import io.reactivex.Observable;
  */
 
 public class RxUtils {
+    private static RxUtils instance;
+
+    public static RxUtils getInstance(){
+        if(instance == null )
+            instance = new RxUtils();
+
+        return instance;
+    }
     /**
      * Converts an ObservableField to an Observable. Note that setting null value inside
      * ObservableField (except for initial value) throws a NullPointerException.
      * @return Observable that contains the latest value in the ObservableField
      */
     @NonNull
-    public static <T> Observable<T> toObservable(@NonNull final ObservableField<T> field) {
+    public <T> Observable<T> toObservable(@NonNull final ObservableField<T> field) {
         return Observable.create(emitter -> {
             T initialValue = field.get();
 

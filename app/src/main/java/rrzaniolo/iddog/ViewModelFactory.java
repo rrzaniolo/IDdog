@@ -13,6 +13,8 @@ import android.support.annotation.NonNull;
 
 import rrzaniolo.iddog.home.HomeViewModel;
 import rrzaniolo.iddog.login.LoginViewModel;
+import rrzaniolo.iddog.network.ConsumerService;
+import rrzaniolo.iddog.utils.RxUtils;
 import rrzaniolo.iddog.utils.SharedPreferencesUtils;
 
 /**
@@ -56,6 +58,9 @@ public class ViewModelFactory extends ViewModelProvider.NewInstanceFactory {
             return (T) new LoginViewModel(
                     getApplication(),
                     new SharedPreferencesUtils(getApplication()),
+                    new ConsumerService(),
+                    ConsumerService.getInstance(getApplication()),
+                    RxUtils.getInstance(),
                     getApplication().getString(R.string.em_email));
         } else if (modelClass.isAssignableFrom(HomeViewModel.class)) {
             //noinspection unchecked
