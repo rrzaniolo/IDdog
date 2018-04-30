@@ -1,8 +1,8 @@
 <resources>
     <!-- Login Activity -->
     <string name="aLogin_title">The IDDOG</string>
-    <string name="aLogin_email">your email</string>
-    <string name="aLogin_button">sing in</string>
+    <string name="aLogin_email">What is your email?</string>
+    <string name="aLogin_button">sign in</string>
 
     <!-- Error Messages -->
     <string name="em_apiSignUp">Something wrong happened.\nPlease try again.</string>
