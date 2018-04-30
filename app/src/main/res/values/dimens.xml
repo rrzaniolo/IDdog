@@ -14,7 +14,7 @@
     <dimen name="aLogin_tietEmail_minWidth">200dp</dimen>
     <dimen name="aLogin_tietEmail_textSize">22sp</dimen>
 
-    <dimen name="aLogin_btnLogin_marginTop">32dp</dimen>
+    <dimen name="aLogin_btnLogin_marginTop">24dp</dimen>
     <dimen name="aLogin_btnLogin_marginBottom">16dp</dimen>
     <dimen name="aLogin_btnLogin_marginStart">16dp</dimen>
     <dimen name="aLogin_btnLogin_marginEnd">16dp</dimen>

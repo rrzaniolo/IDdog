@@ -26,7 +26,11 @@ public class ViewModelFactory extends ViewModelProvider.NewInstanceFactory {
     @SuppressLint("StaticFieldLeak")
     private static volatile ViewModelFactory INSTANCE;
 
-    private final Application mApplication;
+    private final Application application;
+
+    private Application getApplication() {
+        return application;
+    }
 
     public static ViewModelFactory getInstance(Application application) {
 
@@ -41,7 +45,7 @@ public class ViewModelFactory extends ViewModelProvider.NewInstanceFactory {
     }
 
     private ViewModelFactory(Application application) {
-        mApplication = application;
+        this.application = application;
     }
 
     @NonNull
@@ -49,10 +53,13 @@ public class ViewModelFactory extends ViewModelProvider.NewInstanceFactory {
     public <T extends ViewModel> T create(@NonNull Class<T> modelClass) {
         if (modelClass.isAssignableFrom(LoginViewModel.class)) {
             //noinspection unchecked
-            return (T) new LoginViewModel(mApplication, new SharedPreferencesUtils(mApplication));
+            return (T) new LoginViewModel(
+                    getApplication(),
+                    new SharedPreferencesUtils(getApplication()),
+                    getApplication().getString(R.string.em_email));
         } else if (modelClass.isAssignableFrom(HomeViewModel.class)) {
             //noinspection unchecked
-            return (T) new HomeViewModel(mApplication);
+            return (T) new HomeViewModel(getApplication());
         }
         throw new IllegalArgumentException("Unknown ViewModel class: " + modelClass.getName());
     }

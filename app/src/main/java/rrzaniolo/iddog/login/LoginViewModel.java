@@ -42,12 +42,14 @@ public class LoginViewModel extends AndroidViewModel {
     //region --- Variables ---
     private final SnackbarMessage snackbarMessage = new SnackbarMessage();
     private final LoadingDialog loadingDialog = new LoadingDialog();
+    private final String emailErrorMessage;
 
     private SharedPreferencesUtils prefUtils;
 
     private ObservableField<Boolean> isEmailValid = new ObservableField<>(false);
     private ObservableField<Boolean> isEmailError = new ObservableField<>(false);
     private ObservableField<String> email = new ObservableField<>("");
+    private ObservableField<String> errorMessage = new ObservableField<>("");
     //endregion
 
     //region --- Getter and Setters ---
@@ -57,6 +59,10 @@ public class LoginViewModel extends AndroidViewModel {
 
     public LoadingDialog getLoadingDialog() {
         return loadingDialog;
+    }
+
+    public String getEmailErrorMessage() {
+        return emailErrorMessage;
     }
 
     private SharedPreferencesUtils getPrefUtils() {
@@ -79,7 +85,7 @@ public class LoginViewModel extends AndroidViewModel {
         return isEmailError;
     }
 
-    public void setIsEmailError(Boolean isEmailError) {
+    private void setIsEmailError(Boolean isEmailError) {
         this.isEmailError.set(isEmailError);
     }
 
@@ -91,14 +97,28 @@ public class LoginViewModel extends AndroidViewModel {
     public void setEmail(String email) {
         this.email.set(checkNotNull(email));
     }
+
+    public ObservableField<String> getErrorMessage() {
+        return errorMessage;
+    }
+
+    private void setErrorMessage(String errorMessage) {
+        this.errorMessage.set(errorMessage);
+    }
+
     //endregion
 
     //region --- Constructors ---
-    public LoginViewModel(@NonNull Application application, SharedPreferencesUtils prefUtils) {
+    public LoginViewModel(@NonNull Application application, SharedPreferencesUtils prefUtils,
+                          String emailErrorMessage) {
         super(application);
+
+        this.emailErrorMessage = emailErrorMessage;
+
         setPrefUtils(prefUtils);
         setEmailValidation();
         setEmailError();
+        setErrorMessageDisplay();
     }
     //endregion
 
@@ -121,6 +141,21 @@ public class LoginViewModel extends AndroidViewModel {
                 (email, control) ->
                         !checkEmail(email) && isNotNullNorEmpty(email)
         ).subscribe(this::setIsEmailError);
+    }
+
+    @SuppressLint("CheckResult")
+    private void setErrorMessageDisplay(){
+        Observable.combineLatest(
+                toObservable(getIsEmailError()),
+                toObservable(new ObservableField<>(true)),
+                (isError, control) ->
+                        isError
+        ).subscribe(isError -> {
+            if(isError)
+                setErrorMessage(getEmailErrorMessage());
+            else
+                setErrorMessage("");
+        });
     }
 
     private void showSnackbarMessage(@NonNull Integer message) {

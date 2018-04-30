@@ -49,12 +49,14 @@
             android:fontFamily="@font/heebo_light"
             android:hint="@string/aLogin_email"
             android:textColorHint="@color/purplishBlue"
-            app:error="@{@string/em_email}"
+            app:error="@{viewModel.errorMessage}"
             app:errorEnabled="@{viewModel.isEmailError}"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
+            app:layout_constraintTop_toTopOf="parent"
+            tools:error="@string/em_email"
+            tools:errorEnabled="true">
 
             <android.support.design.widget.TextInputEditText
                 android:id="@id/aLogin_tietEmail"

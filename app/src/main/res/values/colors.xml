@@ -4,8 +4,8 @@
     <color name="colorPrimary30">#4D3F51B5</color>
     <color name="colorPrimaryDark">#FF303F9F</color>
     <color name="colorPrimaryDark30">#4D303F9F</color>
-    <color name="colorAccent">#FFFF4081</color>
-    <color name="colorAccent30">#4DFF4081</color>
+    <color name="colorAccent">#FF6C5B7B</color>
+    <color name="colorAccent30">#4D6C5B7B</color>
 
     <color name="transparent">#00000000</color>
     <color name="white">#FFFFFFFF</color>

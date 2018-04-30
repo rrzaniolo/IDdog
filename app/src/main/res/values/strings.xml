@@ -7,5 +7,5 @@
     <!-- Error Messages -->
     <string name="em_apiSignUp">Something wrong happened.\nPlease try again.</string>
     <string name="em_noConnection">Please, check your internet\nand try again.</string>
-    <string name="em_email">You must type in\na valid email.</string>
+    <string name="em_email">You must type in a valid email.</string>
 </resources>
