@@ -87,11 +87,14 @@ public class LoginActivity extends AppCompatActivity {
         try {
             checkNotNull(checkNotNull(getViewModel()).getLoadingDialog())
                     .observe(LoginActivity.this, new LoadingDialog.LoadingDialogObserver() {
-
                 @Override
                 public void onVisibilityChange(@NonNull Boolean isVisible) {
                     try {
-                        LoadingDialogUtils.changeLoadingDialogVisibility(checkNotNull(checkNotNull(getBinding()).getRoot()), isVisible);
+                        LoadingDialogUtils.changeLoadingDialogVisibility(
+                                checkNotNull(checkNotNull(getBinding()).getRoot()),
+                                isVisible,
+                                "",
+                                getSupportFragmentManager());
                     } catch (NullPointerException e) {
                         Log.e(TAG, e.getLocalizedMessage());
                     }

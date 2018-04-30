@@ -2,6 +2,7 @@
 <resources>
 
     <item name="aLogin_tvTitle" type="id"/>
+    <item name="aLogin_ctilEmail" type="id"/>
     <item name="aLogin_etEmail" type="id"/>
     <item name="aLogin_btnLogin" type="id"/>
 </resources>

@@ -1,6 +1,5 @@
 package rrzaniolo.iddog.network;
 
-import android.annotation.SuppressLint;
 import android.content.Context;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
@@ -14,44 +13,49 @@ import com.google.gson.GsonBuilder;
 import java.io.IOException;
 import java.util.concurrent.TimeUnit;
 
-//import io.reactivex.Observa
 import okhttp3.Interceptor;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
+import okhttp3.Response;
 import retrofit2.Retrofit;
+import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;
 import rrzaniolo.iddog.BuildConfig;
 import rrzaniolo.iddog.utils.Constants;
 
 import static rrzaniolo.iddog.utils.Preconditions.checkNotNull;
 
+//import io.reactivex.Observa
+
 /**
  * Created by Rodrigo Rodrigues Zaniolo on 4/29/2018.
  * All rights reserved.
  */
-public class RetrofitManager {
+public class ConsumerService {
 
     //region --- Constants ---
-    private static String TAG = "RetrofitManager";
+    private static String TAG = "ConsumerService";
     //endregion
 
     //region --- Variables ---
     private static volatile Retrofit retrofit = null;
     private static volatile OkHttpClient okHttpClient = null;
+    private static IConsumerService iConsumerServiceAPI;
     //endregion
 
     //region --- Constructors ---
-    public RetrofitManager() { }
+    public ConsumerService() { }
     //endregion
 
     /* Private Methods. */
-    private static OkHttpClient getOkHttpClient(){
+    private static OkHttpClient getOkHttpClient(Context context){
         if(okHttpClient == null) {
             synchronized (RequestManager.class) {
                 if (okHttpClient == null) {
                     if (BuildConfig.DEBUG) {
                         okHttpClient = new OkHttpClient.Builder()
                                 .addNetworkInterceptor(new LoggingInterceptor())
+                                .addInterceptor(new HeaderInterceptor(context))
                                 .connectTimeout(30, TimeUnit.SECONDS)
                                 .writeTimeout(30, TimeUnit.SECONDS)
                                 .readTimeout(30, TimeUnit.SECONDS)
@@ -59,17 +63,19 @@ public class RetrofitManager {
                     } else {
                         okHttpClient = new OkHttpClient.Builder()
                                 .connectTimeout(30, TimeUnit.SECONDS)
+                                .addInterceptor(new HeaderInterceptor(context))
                                 .writeTimeout(30, TimeUnit.SECONDS)
                                 .readTimeout(30, TimeUnit.SECONDS)
                                 .build();
                     }
+
                 }
             }
         }
         return okHttpClient;
     }
 
-    private Retrofit getRetrofit(){
+    private static Retrofit getRetrofit(Context context){
         if(retrofit == null) {
             synchronized (RequestManager.class){
                 if(retrofit == null){
@@ -79,8 +85,9 @@ public class RetrofitManager {
 
                     retrofit = new Retrofit.Builder()
                             .baseUrl(Constants.BASE_URL)
+                            .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
                             .addConverterFactory(GsonConverterFactory.create(gson))
-                            .client(getOkHttpClient())
+                            .client(getOkHttpClient(context))
                             .build();
                 }
             }
@@ -89,6 +96,12 @@ public class RetrofitManager {
         return retrofit;
     }
 
+    public static synchronized IConsumerService getInstance(Context context) {
+        if (iConsumerServiceAPI == null)
+            iConsumerServiceAPI = getRetrofit(context).create(IConsumerService.class);
+
+        return iConsumerServiceAPI;
+    }
     /* Public Method. */
 
     /**
@@ -108,7 +121,7 @@ public class RetrofitManager {
         }
     }
 
-    /* Inner Class. */
+    //region --- Interceptors ---
     private static class LoggingInterceptor implements Interceptor {
         @Override
         public okhttp3.Response intercept(@NonNull Interceptor.Chain chain) throws IOException {
@@ -126,4 +139,25 @@ public class RetrofitManager {
             return response;
         }
     }
+
+    private static class HeaderInterceptor implements Interceptor {
+
+        HeaderInterceptor(Context context) { }
+
+        @Override
+        public Response intercept(@NonNull Chain chain) throws IOException {
+            Request original = chain.request();
+
+            //String idToken = StringUtils.isNotNullOrEmpty(datas.getToken()) ? datas.getToken() : "";
+
+            Request request = original.newBuilder()
+                    .header("Content-Type", "application/json")
+                    //.header("Authorization", idToken)
+                    .method(original.method(), original.body())
+                    .build();
+
+            return chain.proceed(request);
+        }
+    }
+    //endregion
 }

@@ -13,6 +13,7 @@ import android.support.annotation.NonNull;
 
 import rrzaniolo.iddog.home.HomeViewModel;
 import rrzaniolo.iddog.login.LoginViewModel;
+import rrzaniolo.iddog.utils.SharedPreferencesUtils;
 
 /**
  * A creator is used to inject the product ID into the ViewModel
@@ -48,7 +49,7 @@ public class ViewModelFactory extends ViewModelProvider.NewInstanceFactory {
     public <T extends ViewModel> T create(@NonNull Class<T> modelClass) {
         if (modelClass.isAssignableFrom(LoginViewModel.class)) {
             //noinspection unchecked
-            return (T) new LoginViewModel(mApplication);
+            return (T) new LoginViewModel(mApplication, new SharedPreferencesUtils(mApplication));
         } else if (modelClass.isAssignableFrom(HomeViewModel.class)) {
             //noinspection unchecked
             return (T) new HomeViewModel(mApplication);

@@ -38,6 +38,7 @@ ext {
     espressoVersion = '3.0.2'
     constraintLayout = '1.1.0'
     glideVersion = '3.7.0'
+    lottieVersion = "2.3.0"
 
     // Rx Libraries - Reactive Programming.
     rxJava2Version = '2.0.9'
@@ -49,7 +50,7 @@ ext {
 
     // Google API
     gsonVersion = '2.8.0'
-    playServicesVersion = '11.0.2'
+    playServicesVersion = '15.0.0'
 
 
     // Architecture Components dependencies

@@ -1,7 +1,6 @@
 package rrzaniolo.iddog.utils;
 
 import android.support.annotation.NonNull;
-import android.util.Patterns;
 
 /**
  * Created by Rodrigo Rodrigues Zaniolo on 4/28/2018.
@@ -30,5 +29,13 @@ public final class Preconditions {
     public static @NonNull
     Boolean checkEmail(@NonNull final String email){
       return android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches();
-    };
+    }
+
+    public static @NonNull
+    Boolean isNotNullNorEmpty(final String toCheck){
+        if(toCheck == null || toCheck.isEmpty())
+            return false;
+        else
+            return true;
+    }
 }

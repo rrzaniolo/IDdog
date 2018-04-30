@@ -8,12 +8,15 @@ public class Constants {
 
     //region --- API ---
     public static String BASE_URL   = "https://iddog-api.now.sh/";
-    public static String LOGIN_URL  = "signup";
-    public static String FEED_URL   = "feed";
+    public static String USER_TOKEN = "userToken";
 
     public static String CATEGORY_HUSKY     = "husky";
     public static String CATEGORY_LABRADOR  = "labrador";
     public static String CATEGORY_HOUND     = "hound";
     public static String CATEGORY_PUG       = "pug";
+    //endregion
+
+    //region --- Bundle ---
+    public static String BUNDLE_LOADING_MESSAGE = "loadingDialogMessage";
     //endregion
 }

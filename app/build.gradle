@@ -67,7 +67,10 @@ dependencies {
     implementation "com.android.support:recyclerview-v7:$rootProject.supportLibraryVersion"
     implementation "com.android.support:support-v4:$rootProject.supportLibraryVersion"
     implementation "com.android.support.constraint:constraint-layout:$rootProject.constraintLayout"
-    implementation "com.github.bumptech.glide:glide:$rootProject.glideVersion"
+    implementation ("com.github.bumptech.glide:glide:$rootProject.glideVersion") {
+        exclude group: "com.android.support"
+    }
+    implementation "com.airbnb.android:lottie:$rootProject.lottieVersion"
 
     // Google Libraries - API.
     implementation "com.google.code.gson:gson:$rootProject.gsonVersion"
@@ -81,6 +84,7 @@ dependencies {
     implementation "com.squareup.retrofit2:retrofit:$rootProject.retrofitVersion"
     implementation "com.squareup.okhttp3:okhttp:$rootProject.retrofitOkhttp"
     implementation "com.squareup.retrofit2:converter-gson:$rootProject.retrofitVersion"
+    implementation "com.squareup.retrofit2:adapter-rxjava2:$rootProject.retrofitVersion"
 
     // Architecture Components
     implementation "android.arch.persistence.room:runtime:$rootProject.roomVersion"

@@ -36,28 +36,36 @@
             tools:layout_conversion_absoluteWidth="146dp"
             tools:text="@string/aLogin_title" />
 
-        <EditText
-            android:id="@id/aLogin_etEmail"
+        <rrzaniolo.iddog.base.CustomTextInputLayout
+            android:id="@id/aLogin_ctilEmail"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/aLogin_etEmail_marginTop"
-            android:layout_marginBottom="@dimen/aLogin_etEmail_marginBottom"
-            android:layout_marginStart="@dimen/aLogin_etEmail_marginStart"
-            android:layout_marginEnd="@dimen/aLogin_etEmail_marginEnd"
-            android:background="@color/transparent"
-            android:text="@{viewModel.email}"
-            android:hint="@string/aLogin_email"
-            android:inputType="textEmailAddress"
-            android:textColor="@color/purplishBlue"
-            android:textColorHint="@color/purple"
-            android:textSize="@dimen/aLogin_etEmail_textSize"
+            android:layout_marginBottom="@dimen/aLogin_ctilEmail_marginBottom"
+            android:layout_marginEnd="@dimen/aLogin_ctilEmail_marginEnd"
+            android:layout_marginStart="@dimen/aLogin_ctilEmail_marginStart"
+            android:layout_marginTop="@dimen/aLogin_ctilEmail_marginTop"
             android:fontFamily="@font/heebo_light"
-            app:layout_constraintTop_toTopOf="parent"
+            android:hint="@string/aLogin_email"
+            android:textColorHint="@color/purplishBlue"
+            app:error="@{@string/em_email}"
+            app:errorEnabled="@{viewModel.isEmailValid}"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            tools:layout_conversion_absoluteHeight="25dp"
-            tools:layout_conversion_absoluteWidth="83dp" />
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <EditText
+                android:id="@id/aLogin_etEmail"
+                style="@style/AppTheme.EmailTextInputEditText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/heebo_light"
+                android:inputType="textEmailAddress"
+                android:text="@={viewModel.email}"
+                tools:layout_conversion_absoluteHeight="25dp"
+                tools:layout_conversion_absoluteWidth="83dp"
+                tools:ignore="LabelFor" />
+        </rrzaniolo.iddog.base.CustomTextInputLayout>
 
         <Button
             android:id="@id/aLogin_btnLogin"
@@ -69,12 +77,12 @@
             android:background="@drawable/btn_login"
             android:text="@string/aLogin_button"
             android:textColor="@color/white"
-            android:enabled="@{vielModel.isEnable}"
+            android:enabled="@{viewModel.isEnable}"
             android:textSize="@dimen/aLogin_btnLogin_textSize"
-            android:onClick="@{viewModel.onLogin}"
+            android:onClick="@{viewModel.onLogin()}"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/aLogin_etEmail" />
+            app:layout_constraintTop_toBottomOf="@+id/aLogin_ctilEmail" />
 
     </android.support.constraint.ConstraintLayout>
 </layout>

@@ -1,0 +1,43 @@
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context=".base.LoadingDialogFragment" >
+
+    <data>
+        <import type="android.view.View" />
+        <import type="rrzaniolo.iddog.utils.Preconditions" />
+
+        <variable
+            name="message"
+            type="String" />
+    </data>
+
+    <LinearLayout
+        android:id="@+id/dLoading_llLoading"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:gravity="center"
+        android:background="@color/transparent"
+        style="@style/AppTheme.RelativeLayout.DialogFragment.Loading">
+
+        <com.airbnb.lottie.LottieAnimationView
+            android:id="@+id/dLoading_pbLoading"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:lottie_rawRes="@raw/loader"/>
+
+        <TextView
+            android:id="@+id/dLoading_tvMessage"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="6dp"
+            android:text="@{message}"
+            android:textColor="@color/white"
+            android:textSize="14sp"
+            android:visibility="@{Preconditions.isNotNullNorEmpty(message) ? View.VISIBLE : View.GONE}"
+            android:fontFamily="@font/heebo_light"
+            tools:targetApi="lollipop" />
+    </LinearLayout>
+</layout>
+
