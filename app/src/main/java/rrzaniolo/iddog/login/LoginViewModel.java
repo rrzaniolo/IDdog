@@ -1,13 +1,14 @@
 package rrzaniolo.iddog.login;
 
+import android.annotation.SuppressLint;
 import android.app.Application;
 import android.arch.lifecycle.AndroidViewModel;
-import android.databinding.ObservableBoolean;
 import android.databinding.ObservableField;
 import android.support.annotation.NonNull;
 import android.util.Log;
 import android.view.View;
 
+import io.reactivex.Observable;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -16,14 +17,18 @@ import rrzaniolo.iddog.LiveEvents.SnackbarMessage;
 import rrzaniolo.iddog.R;
 import rrzaniolo.iddog.network.ConsumerService;
 import rrzaniolo.iddog.network.IConsumerService;
+import rrzaniolo.iddog.network.JsonObjectUtils;
+import rrzaniolo.iddog.network.entries.SignInResponse;
 import rrzaniolo.iddog.network.entries.User;
 import rrzaniolo.iddog.utils.Constants;
 import rrzaniolo.iddog.utils.SharedPreferencesUtils;
 
 import static rrzaniolo.iddog.utils.Preconditions.checkEmail;
 import static rrzaniolo.iddog.utils.Preconditions.checkNotNull;
+import static rrzaniolo.iddog.utils.Preconditions.isNotNullNorEmpty;
+import static rrzaniolo.iddog.utils.RxUtils.toObservable;
 
-/**
+/*
  * Created by Rodrigo Rodrigues Zaniolo on 4/28/2018.
  * All rights reserved.
  */
@@ -40,8 +45,8 @@ public class LoginViewModel extends AndroidViewModel {
 
     private SharedPreferencesUtils prefUtils;
 
-    private ObservableBoolean isEnable = new ObservableBoolean(false);
-    private ObservableBoolean isEmailValid = new ObservableBoolean(false);
+    private ObservableField<Boolean> isEmailValid = new ObservableField<>(false);
+    private ObservableField<Boolean> isEmailError = new ObservableField<>(false);
     private ObservableField<String> email = new ObservableField<>("");
     //endregion
 
@@ -62,21 +67,20 @@ public class LoginViewModel extends AndroidViewModel {
         this.prefUtils = prefUtils;
     }
 
-    @SuppressWarnings("unused")
-    public ObservableBoolean getIsEnable() {
-        return isEnable;
-    }
-
-    public void setIsEnable(Boolean isEnable) {
-        this.isEnable.set(isEnable);
-    }
-
-    public ObservableBoolean getIsEmailValid() {
+    public ObservableField<Boolean> getIsEmailValid() {
         return isEmailValid;
     }
 
-    public void setIsEmailValid(Boolean isEmailValid) {
+    private void setIsEmailValid(Boolean isEmailValid) {
         this.isEmailValid.set(isEmailValid);
+    }
+
+    public ObservableField<Boolean> getIsEmailError() {
+        return isEmailError;
+    }
+
+    public void setIsEmailError(Boolean isEmailError) {
+        this.isEmailError.set(isEmailError);
     }
 
     public ObservableField<String> getEmail() {
@@ -86,8 +90,6 @@ public class LoginViewModel extends AndroidViewModel {
     @SuppressWarnings("unused")
     public void setEmail(String email) {
         this.email.set(checkNotNull(email));
-        setIsEmailValid(checkEmail(email));
-        setIsEnable(getIsEmailValid().get());
     }
     //endregion
 
@@ -95,10 +97,32 @@ public class LoginViewModel extends AndroidViewModel {
     public LoginViewModel(@NonNull Application application, SharedPreferencesUtils prefUtils) {
         super(application);
         setPrefUtils(prefUtils);
+        setEmailValidation();
+        setEmailError();
     }
     //endregion
 
     //region -- Private Methods ---
+    @SuppressLint("CheckResult")
+    private void setEmailValidation(){
+        Observable.combineLatest(
+                toObservable(getEmail()),
+                toObservable(new ObservableField<>(true)),
+                (email, control) ->
+                        checkEmail(email) && isNotNullNorEmpty(email)
+                ).subscribe(this::setIsEmailValid);
+    }
+
+    @SuppressLint("CheckResult")
+    private void setEmailError(){
+        Observable.combineLatest(
+                toObservable(getEmail()),
+                toObservable(new ObservableField<>(true)),
+                (email, control) ->
+                        !checkEmail(email) && isNotNullNorEmpty(email)
+        ).subscribe(this::setIsEmailError);
+    }
+
     private void showSnackbarMessage(@NonNull Integer message) {
         getSnackbarMessage().setValue(message);
     }
@@ -126,46 +150,52 @@ public class LoginViewModel extends AndroidViewModel {
     }
 
     private void performSingUp(IConsumerService instance){
-        instance.signUp().enqueue(new Callback<User>() {
-            @Override
-            public void onResponse(@NonNull Call<User> call, @NonNull Response<User> response) {
-                setLoadingDialogVisibility(false);
-                if(response.isSuccessful()){
-                    saveUserInfo(response.body());
-                }else{
-                    Log.e(TAG, response.message());
+        try {
+            instance.signIn(JsonObjectUtils.signInBody(checkNotNull(getEmail().get()))).enqueue(new Callback<SignInResponse>() {
+                @Override
+                public void onResponse(@NonNull Call<SignInResponse> call, @NonNull Response<SignInResponse> response) {
+                    try {
+                        setLoadingDialogVisibility(false);
+                        if (response.isSuccessful()) {
+                            saveUserInfo(checkNotNull(response.body()).getUser());
+                        } else {
+                            Log.e(TAG, response.message());
+                            showSnackbarMessage(R.string.em_apiSignUp);
+                        }
+                    }catch(NullPointerException e){
+                        Log.e(TAG, e.getLocalizedMessage());
+                        showSnackbarMessage(R.string.em_apiSignUp);
+                    }
+                }
+
+                @Override
+                public void onFailure(@NonNull Call<SignInResponse> call, @NonNull Throwable t) {
+                    setLoadingDialogVisibility(false);
+                    Log.e(TAG, t.getLocalizedMessage());
                     showSnackbarMessage(R.string.em_apiSignUp);
                 }
-            }
-
-            @Override
-            public void onFailure(@NonNull Call<User> call, @NonNull Throwable t) {
-                setLoadingDialogVisibility(false);
-                Log.e(TAG, t.getLocalizedMessage());
-                showSnackbarMessage(R.string.em_apiSignUp);
-            }
-        });
+            });
+        }catch(NullPointerException e){
+            Log.e(TAG, e.getLocalizedMessage());
+            showSnackbarMessage(R.string.em_apiSignUp);
+        }
     }
     //endregion
 
     //region --- Public Methods ---
     public View.OnClickListener onLogin(){
-        return new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                signUn(new ConsumerService());
-            }
-        };
+        return v -> signUn(new ConsumerService());
     }
     //endregion
 
     //region --- API CALL ---
     private void signUn(ConsumerService consumerService){
         if(consumerService.hasInternetConnection(getApplication())){
-            showSnackbarMessage(R.string.em_noConnection);
-        }else{
             setLoadingDialogVisibility(true);
             performSingUp(ConsumerService.getInstance(getApplication()));
+        }else{
+            showSnackbarMessage(R.string.em_noConnection);
+
         }
     }
     //endregion

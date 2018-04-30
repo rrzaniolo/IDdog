@@ -27,7 +27,7 @@ public final class Preconditions {
     }
 
     public static @NonNull
-    Boolean checkEmail(@NonNull final String email){
+    Boolean checkEmail(@NonNull String email){
       return android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches();
     }
 
