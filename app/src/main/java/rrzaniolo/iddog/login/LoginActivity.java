@@ -58,26 +58,26 @@ public class LoginActivity extends AppCompatActivity {
 
         setViewModel(ViewModelFactory.getInstance(getApplication()).create(LoginViewModel.class));
         setBinding();
-        getBinding().setViewModel(getViewModel());
         setUpSnackBar();
         setUpLoadingDialog();
     }
     //endregion
 
     //region --- Private Methods ---
+    private void setUpBiding(){
+        setBinding();
+        getBinding().setViewModel(getViewModel());
+    }
     private void setUpSnackBar(){
         try {
             checkNotNull(checkNotNull(getViewModel().getSnackbarMessage()))
-                    .observe(LoginActivity.this, new SnackbarMessage.SnackbarObserver() {
-                @Override
-                public void onNewMessage(int messageResourceId) {
-                    try {
-                        SnackbarUtils.showSnackbar(checkNotNull(checkNotNull(getBinding()).getRoot()), getString(messageResourceId));
-                    } catch (NullPointerException e) {
-                        Log.e(TAG, e.getLocalizedMessage());
-                    }
-                }
-            });
+                    .observe(LoginActivity.this, (SnackbarMessage.SnackbarObserver) messageResourceId -> {
+                        try {
+                            SnackbarUtils.showSnackbar(checkNotNull(checkNotNull(getBinding()).getRoot()), getString(messageResourceId));
+                        } catch (NullPointerException e) {
+                            Log.e(TAG, e.getLocalizedMessage());
+                        }
+                    });
         }catch(NullPointerException e){
             Log.e(TAG, e.getLocalizedMessage());
         }

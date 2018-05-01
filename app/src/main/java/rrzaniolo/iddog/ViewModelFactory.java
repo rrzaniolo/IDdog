@@ -11,6 +11,8 @@ import android.arch.lifecycle.ViewModel;
 import android.arch.lifecycle.ViewModelProvider;
 import android.support.annotation.NonNull;
 
+import rrzaniolo.iddog.base.TabLayoutConfiguration;
+import rrzaniolo.iddog.base.ViewPagerConfiguration;
 import rrzaniolo.iddog.home.HomeViewModel;
 import rrzaniolo.iddog.login.LoginViewModel;
 import rrzaniolo.iddog.network.ConsumerService;
@@ -64,7 +66,10 @@ public class ViewModelFactory extends ViewModelProvider.NewInstanceFactory {
                     getApplication().getString(R.string.em_email));
         } else if (modelClass.isAssignableFrom(HomeViewModel.class)) {
             //noinspection unchecked
-            return (T) new HomeViewModel(getApplication());
+            return (T) new HomeViewModel(
+                    getApplication(),
+                    new ViewPagerConfiguration(),
+                    new TabLayoutConfiguration());
         }
         throw new IllegalArgumentException("Unknown ViewModel class: " + modelClass.getName());
     }

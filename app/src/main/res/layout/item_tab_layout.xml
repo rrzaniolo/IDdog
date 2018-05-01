@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <import type="rrzaniolo.iddog.R" />
+        <import type="android.view.View" />
+
+        <variable
+            name="title"
+            type="String" />
+
+        <variable
+            name="enable"
+            type="boolean" />
+
+    </data>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            tools:ignore="UseCompoundDrawables,UselessParent">
+
+            <ImageView
+                android:layout_width="10dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="-2.5dp"
+                android:visibility="invisible"
+                app:animation="@{enable ? R.anim.rotate_fade_in : R.anim.rotate_fade_out}"
+                app:srcCompat="@drawable/ic_selected_tab_item"
+                app:visibility="@{enable}"
+                app:visibilityType="@{View.INVISIBLE}"
+                tools:ignore="ContentDescription" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:layout_marginBottom="10dp"
+                android:text="@{title}"
+                android:textColor="@{enable ? @color/purplishPink : @color/purple}"
+                app:fontFamily="@{enable ? R.font.heebo_extra_bold : R.font.heebo_regular}"
+                tools:text="PlaceHolder" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+</layout>

@@ -13,7 +13,7 @@
     </data>
 
     <LinearLayout
-        android:id="@+id/dLoading_llLoading"
+        android:id="@id/dLoading_llLoading"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
@@ -22,14 +22,14 @@
         style="@style/AppTheme.RelativeLayout.DialogFragment.Loading">
 
         <com.airbnb.lottie.LottieAnimationView
-            android:id="@+id/dLoading_pbLoading"
+            android:id="@id/dLoading_pbLoading"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             app:lottie_rawRes="@raw/trail_loader"
             app:lottie_colorFilter="@color/purplishBlue"/>
 
         <TextView
-            android:id="@+id/dLoading_tvMessage"
+            android:id="@id/dLoading_tvMessage"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="6dp"
