@@ -16,8 +16,10 @@ import android.support.v4.view.ViewPager;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
+import android.widget.GridView;
 import android.widget.TextView;
 
+import rrzaniolo.iddog.base.GridViewConfiguration;
 import rrzaniolo.iddog.base.TabLayoutConfiguration;
 import rrzaniolo.iddog.base.ViewPagerConfiguration;
 
@@ -59,6 +61,12 @@ public class BinderAdapterUtils {
     @BindingAdapter("tabLayout_configuration")
     public static void configureViewPager(TabLayout tabLayout, TabLayoutConfiguration tabLayoutConfiguration) {
         tabLayout.addOnTabSelectedListener(tabLayoutConfiguration.getOnTabSelectedListener());
+    }
+
+    @BindingAdapter("gridView_configuration")
+    public static void configureGridView(GridView gridView, GridViewConfiguration gridViewConfiguration){
+        gridView.setAdapter(gridViewConfiguration.getAdapter());
+        gridView.setOnItemClickListener(gridViewConfiguration.getClickListener());
     }
 
     @BindingAdapter(value = {"animation", "visibility", "visibilityType"})

@@ -17,10 +17,13 @@ import rrzaniolo.iddog.BR;
  * */
 public class ViewPagerConfiguration extends BaseObservable {
 
+    //region --- Variables ---
     private FragmentStatePagerAdapter adapter;
     private ViewPager.PageTransformer pageTransformer;
     private ViewPager.OnPageChangeListener onPageChangeListener;
+    //endregion
 
+    //region --- Getters and Setters  ---
     @Bindable
     public FragmentStatePagerAdapter getAdapter() {
         return adapter;
@@ -50,4 +53,5 @@ public class ViewPagerConfiguration extends BaseObservable {
         this.onPageChangeListener = onPageChangeListener;
         notifyPropertyChanged(BR.onPageChangeListener);
     }
+    //endregion
 }

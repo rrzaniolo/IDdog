@@ -10,12 +10,17 @@ import android.arch.lifecycle.AndroidViewModel;
 import android.support.annotation.NonNull;
 import android.util.Log;
 
+import java.util.List;
+
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
+import rrzaniolo.iddog.LiveEvents.FeedImage;
 import rrzaniolo.iddog.LiveEvents.LoadingDialog;
 import rrzaniolo.iddog.LiveEvents.SnackbarMessage;
 import rrzaniolo.iddog.R;
+import rrzaniolo.iddog.base.CustomGridViewAdapter;
+import rrzaniolo.iddog.base.GridViewConfiguration;
 import rrzaniolo.iddog.network.ConsumerService;
 import rrzaniolo.iddog.network.IConsumerService;
 import rrzaniolo.iddog.network.entries.Feed;
@@ -30,8 +35,11 @@ public class FeedViewModel extends AndroidViewModel{
     //region --- Variables ---
     private final SnackbarMessage snackbarMessage = new SnackbarMessage();
     private final LoadingDialog loadingDialog = new LoadingDialog();
+    private final FeedImage feedImage = new FeedImage();
     private final ConsumerService consumerService;
     private final IConsumerService iConsumerService;
+
+    private GridViewConfiguration gridViewConfiguration;
 
     private String breed = "";
     private Boolean hasFeed = false;
@@ -46,15 +54,23 @@ public class FeedViewModel extends AndroidViewModel{
         return loadingDialog;
     }
 
-    public ConsumerService getConsumerService() {
+    public FeedImage getFeedImage() {
+        return feedImage;
+    }
+
+    private ConsumerService getConsumerService() {
         return consumerService;
     }
 
-    public IConsumerService getIConsumerService() {
+    private IConsumerService getIConsumerService() {
         return iConsumerService;
     }
 
-    public String getBreed() {
+    public GridViewConfiguration getGridViewConfiguration() {
+        return gridViewConfiguration;
+    }
+
+    private String getBreed() {
         return breed;
     }
 
@@ -62,20 +78,21 @@ public class FeedViewModel extends AndroidViewModel{
         this.breed = breed;
     }
 
-    public Boolean getHasFeed() {
+    private Boolean getHasFeed() {
         return hasFeed;
     }
 
-    public void setHasFeed(Boolean hasFeed) {
+    private void setHasFeed(Boolean hasFeed) {
         this.hasFeed = hasFeed;
     }
     //endregion
 
     //region --- Constructors ---
-    public FeedViewModel(@NonNull Application application,
+    public FeedViewModel(@NonNull Application application, @NonNull GridViewConfiguration gridViewConfiguration,
                          @NonNull ConsumerService consumerService, @NonNull IConsumerService iConsumerService) {
         super(application);
 
+        this.gridViewConfiguration = gridViewConfiguration;
         this.consumerService = consumerService;
         this.iConsumerService = iConsumerService;
     }
@@ -112,6 +129,14 @@ public class FeedViewModel extends AndroidViewModel{
             Log.e(TAG, e.getLocalizedMessage());
             showSnackbarMessage(R.string.em_api);
         }
+    }
+
+    private void configureGridView(List<String> feedList){
+
+        getGridViewConfiguration().setAdapter(new CustomGridViewAdapter(feedList));
+        getGridViewConfiguration().setClickListener((parent, view, position, id)
+                -> feedImage.setValue(feedList.get(position))
+        );
     }
     //endregion
 

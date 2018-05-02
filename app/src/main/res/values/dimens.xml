@@ -28,4 +28,13 @@
 
     <dimen name="aHome_tl_height">80dp</dimen>
     <dimen name="aHome_tl_textSize">14sp</dimen>
+
+    <!-- Feed Fragment -->
+    <dimen name="fFeed_gv_margin">4dp</dimen>
+    <dimen name="fFeed_gv_spacingH">4dp</dimen>
+    <dimen name="fFeed_gv_spacingV">4dp</dimen>
+
+    <!-- Content Feed -->
+    <dimen name="cFeed_ivPhoto_margin">0dp</dimen>
+    <dimen name="cFeed_ivPhoto_size">64dp</dimen>
 </resources>

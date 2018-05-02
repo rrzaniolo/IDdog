@@ -11,6 +11,7 @@ import android.arch.lifecycle.ViewModel;
 import android.arch.lifecycle.ViewModelProvider;
 import android.support.annotation.NonNull;
 
+import rrzaniolo.iddog.base.GridViewConfiguration;
 import rrzaniolo.iddog.base.TabLayoutConfiguration;
 import rrzaniolo.iddog.base.ViewPagerConfiguration;
 import rrzaniolo.iddog.home.HomeViewModel;
@@ -75,6 +76,7 @@ public class ViewModelFactory extends ViewModelProvider.NewInstanceFactory {
             //noinspection unchecked
             return (T) new FeedViewModel(
                     getApplication(),
+                    new GridViewConfiguration(),
                     new ConsumerService(),
                     ConsumerService.getInstance(getApplication())
             );

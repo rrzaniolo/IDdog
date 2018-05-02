@@ -15,6 +15,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import rrzaniolo.iddog.LiveEvents.FeedImage;
 import rrzaniolo.iddog.LiveEvents.LoadingDialog;
 import rrzaniolo.iddog.LiveEvents.SnackbarMessage;
 import rrzaniolo.iddog.R;
@@ -95,6 +96,7 @@ public class FeedFragment extends Fragment{
 
             setUpSnackBar();
             setUpLoadingDialog();
+            setUpFeedImage();
 
         }catch (NullPointerException e){
             Log.e(TAG, e.getLocalizedMessage());
@@ -148,6 +150,21 @@ public class FeedFragment extends Fragment{
                                     isVisible,
                                     "",
                                     checkNotNull(getActivity()).getSupportFragmentManager());
+                        } catch (NullPointerException e) {
+                            Log.e(TAG, e.getLocalizedMessage());
+                        }
+                    });
+        }catch(NullPointerException e){
+            Log.e(TAG, e.getLocalizedMessage());
+        }
+    }
+
+    private void setUpFeedImage(){
+        try{
+            checkNotNull(checkNotNull(getViewModel()).getFeedImage())
+                    .observe(FeedFragment.this, (FeedImage.FeedImageObserver) url -> {
+                        try {
+                            String imageUrl = url;
                         } catch (NullPointerException e) {
                             Log.e(TAG, e.getLocalizedMessage());
                         }

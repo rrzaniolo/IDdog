@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<layout
+<layout xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:android="http://schemas.android.com/apk/res/android" >
 
     <data>
@@ -13,6 +13,26 @@
     <android.support.constraint.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
+
+        <GridView
+            android:id="@id/fFeed_gv"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="@dimen/fFeed_gv_margin"
+            android:layout_marginBottom="@dimen/fFeed_gv_margin"
+            android:layout_marginStart="@dimen/fFeed_gv_margin"
+            android:layout_marginEnd="@dimen/fFeed_gv_margin"
+            android:horizontalSpacing="@dimen/fFeed_gv_spacingH"
+            android:verticalSpacing="@dimen/fFeed_gv_spacingV"
+            android:columnWidth="@dimen/cFeed_ivPhoto_size"
+            android:numColumns="auto_fit"
+            android:stretchMode="columnWidth"
+            android:gravity="center"
+            app:gridView_configuration="@{viewModel.gridViewConfiguration}"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"/>
 
     </android.support.constraint.ConstraintLayout>
 </layout>

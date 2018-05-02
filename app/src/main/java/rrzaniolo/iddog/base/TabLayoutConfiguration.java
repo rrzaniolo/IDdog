@@ -16,8 +16,11 @@ import rrzaniolo.iddog.BR;
  * */
 public class TabLayoutConfiguration extends BaseObservable {
 
+    //region --- Variables ---
     private TabLayout.OnTabSelectedListener onTabSelectedListener;
+    //endregion
 
+    //region --- Getters and Setters ---
     @Bindable
     public TabLayout.OnTabSelectedListener getOnTabSelectedListener() {
         return onTabSelectedListener;
@@ -27,19 +30,26 @@ public class TabLayoutConfiguration extends BaseObservable {
         this.onTabSelectedListener = onTabSelectedListener;
         notifyPropertyChanged(BR.onTabSelectedListener);
     }
+    //endregion
 
+    //region --- CustomTab ---
     public static class CustomTab {
 
+        //region --- Variables ---
         private String title;
         private boolean enable;
         private int layout;
+        //endregion
 
+        //region --- Constructors ---
         public CustomTab(String title, boolean enable, int layout) {
             this.title = title;
             this.enable = enable;
             this.layout = layout;
         }
+        //endregion
 
+        //region --- Getters and Setters ---
         public String getTitle() {
             return title;
         }
@@ -63,6 +73,8 @@ public class TabLayoutConfiguration extends BaseObservable {
         public void setLayout(int layout) {
             this.layout = layout;
         }
+        //endregion
     }
+    //endregion
 }
 

@@ -17,4 +17,11 @@
     <item name="dLoading_pbLoading" type="id"/>
     <item name="dLoading_tvMessage" type="id"/>
 
+    <!-- Feed Fragment -->
+    <item name="fFeed_gv"           type="id"/>
+
+    <!-- Content Feed -->
+    <item name="cFeed_ivPhoto"      type="id"/>
+
+
 </resources>
