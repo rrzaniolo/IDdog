@@ -57,14 +57,14 @@ public class LoginActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
 
         setViewModel(ViewModelFactory.getInstance(getApplication()).create(LoginViewModel.class));
-        setBinding();
+        setUpBinding();
         setUpSnackBar();
         setUpLoadingDialog();
     }
     //endregion
 
     //region --- Private Methods ---
-    private void setUpBiding(){
+    private void setUpBinding(){
         setBinding();
         getBinding().setViewModel(getViewModel());
     }

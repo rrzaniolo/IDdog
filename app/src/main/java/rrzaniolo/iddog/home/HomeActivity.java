@@ -10,7 +10,6 @@ import android.util.Log;
 import rrzaniolo.iddog.LiveEvents.OnTabSelected;
 import rrzaniolo.iddog.R;
 import rrzaniolo.iddog.ViewModelFactory;
-import rrzaniolo.iddog.data.TabSelectionParameter;
 import rrzaniolo.iddog.databinding.ActivityHomeBinding;
 import rrzaniolo.iddog.databinding.ItemTabLayoutBinding;
 
@@ -37,7 +36,7 @@ public class HomeActivity extends AppCompatActivity {
         return binding;
     }
 
-    private void setBinding(ActivityHomeBinding binding) {
+    private void setBinding() {
         this.binding = DataBindingUtil.setContentView(HomeActivity.this, R.layout.activity_home);
     }
 
@@ -60,27 +59,27 @@ public class HomeActivity extends AppCompatActivity {
         getViewModel().setUpViewModel(getSupportFragmentManager());
 
         setUpBiding();
+
+        setUpOnTabSelected();
     }
 
     //endregion
 
     //region --- Private Methods ---
     private void setUpBiding(){
-
+        setBinding();
+        getBinding().setViewModel(getViewModel());
     }
 
     private void setUpOnTabSelected(){
         try{
             checkNotNull(checkNotNull(getViewModel()).getOnTabSelected())
-                    .observe(HomeActivity.this, new OnTabSelected.onTabSelectedObserver() {
-                        @Override
-                        public void onTabSelected(TabSelectionParameter parameter) {
-                            try{
-                                checkNotNull(parameter);
-                                setSelectedTabLayout(checkNotNull(parameter.getTab()), checkNotNull(parameter.getState()));
-                            }catch (NullPointerException e){
-                                Log.e(TAG, e.getLocalizedMessage());
-                            }
+                    .observe(HomeActivity.this, (OnTabSelected.onTabSelectedObserver) parameter -> {
+                        try{
+                            checkNotNull(parameter);
+                            setSelectedTabLayout(checkNotNull(parameter.getTab()), checkNotNull(parameter.getState()));
+                        }catch (NullPointerException e){
+                            Log.e(TAG, e.getLocalizedMessage());
                         }
                     });
         }catch (NullPointerException e){

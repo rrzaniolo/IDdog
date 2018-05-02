@@ -3,15 +3,19 @@ package rrzaniolo.iddog.home;
 import android.app.Application;
 import android.arch.lifecycle.AndroidViewModel;
 import android.databinding.ObservableField;
+import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.FragmentManager;
 
+import rrzaniolo.iddog.BR;
 import rrzaniolo.iddog.LiveEvents.OnTabSelected;
 import rrzaniolo.iddog.base.CustomPagerAdapter;
 import rrzaniolo.iddog.base.TabLayoutConfiguration;
 import rrzaniolo.iddog.base.ViewPagerConfiguration;
 import rrzaniolo.iddog.data.TabSelectionParameter;
+import rrzaniolo.iddog.home.feed.FeedFragment;
+import rrzaniolo.iddog.utils.Constants;
 
 /*
  * Created by Rodrigo Rodrigues Zaniolo on 4/28/2018.
@@ -76,10 +80,36 @@ public class HomeViewModel extends AndroidViewModel implements TabLayout.OnTabSe
     //region --- Private Methods ---
     private void configCustomAdapter(){
 
-//        adapter.addFragment(CreditHomeOfferFragment.newInstance(), getString(R.string.credit_option_offer));
-//        adapter.addFragment(CreditHomeHiredFragment.newInstance(), getString(R.string.credit_option_hired));
+        getCustomPagerAdapter().addFragment(
+//                FeedFragment.newInstance(Constants.CATEGORY_HOUND),
+                newFeed(Constants.CATEGORY_HOUND),
+                Constants.CATEGORY_HOUND
+        );
+        getCustomPagerAdapter().addFragment(
+//                FeedFragment.newInstance(Constants.CATEGORY_HUSKY),
+                newFeed(Constants.CATEGORY_HUSKY),
+                Constants.CATEGORY_HUSKY
+        );
+        getCustomPagerAdapter().addFragment(
+//                FeedFragment.newInstance(Constants.CATEGORY_LABRADOR),
+                newFeed(Constants.CATEGORY_LABRADOR),
+                Constants.CATEGORY_LABRADOR
+        );
+        getCustomPagerAdapter().addFragment(
+//                FeedFragment.newInstance(Constants.CATEGORY_PUG),
+                newFeed(Constants.CATEGORY_PUG),
+                Constants.CATEGORY_PUG
+        );
     }
 
+    private FeedFragment newFeed(String category){
+        FeedFragment fragment = new FeedFragment();
+        Bundle bundle = new Bundle();
+        bundle.putString(Constants.BUNDLE_CATEGORY_BREED, category);
+        fragment.setArguments(bundle);
+
+        return fragment;
+    }
     //endregion
 
     //region Public Methods ---
@@ -88,7 +118,7 @@ public class HomeViewModel extends AndroidViewModel implements TabLayout.OnTabSe
         configCustomAdapter();
 
         getVpConfiguration().setAdapter(getCustomPagerAdapter());
-        //notifyPropertyChanged(BR.viewPagerConfiguration);
+        vpConfiguration.notifyPropertyChanged(BR.adapter);
 
         getTlConfiguration().setOnTabSelectedListener(HomeViewModel.this);
 

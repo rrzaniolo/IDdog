@@ -126,7 +126,10 @@ public class CustomPagerAdapter extends SmartFragmentStatePagerAdapter {
 
     private boolean hasFragment(Fragment f) {
         for (Fragment fragment : fragmentList) {
-            if (fragment.getClass().isAssignableFrom(f.getClass())) {
+//            if (fragment.getClass().isAssignableFrom(f.getClass())) {
+//                return true;
+//            }
+            if(fragment.equals(f)){
                 return true;
             }
         }

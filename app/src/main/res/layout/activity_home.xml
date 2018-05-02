@@ -6,7 +6,6 @@
 
     <data>
         <import type="android.view.View" />
-
         <variable
             name="viewModel"
             type="rrzaniolo.iddog.home.HomeViewModel"/>
@@ -19,27 +18,20 @@
         android:weightSum="1"
         android:background="@color/white">
 
-        <RelativeLayout
-            android:id="@id/aHome_rlHeader"
+        <TextView
+            android:id="@id/aHome_tvTitle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="24dp"
+            android:layout_marginTop="@dimen/aHome_tvTitle_marginTop"
+            android:layout_marginStart="@dimen/aHome_tvTitle_marginStart"
+            android:layout_marginEnd="@dimen/aHome_tvTitle_marginEnd"
+            android:gravity="top|center_horizontal"
             android:focusable="true"
-            android:focusableInTouchMode="true">
-
-            <TextView
-                android:id="@id/aHome_tvHeaderLabel"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="24dp"
-                android:layout_marginTop="22dp"
-                android:gravity="top"
-                android:layout_centerInParent="true"
-                android:text="@string/aHome_title"
-                android:textColor="@color/colorPrimaryDark"
-                android:textSize="16sp"
-                android:fontFamily="@font/heebo_bold"/>
-        </RelativeLayout>
+            android:focusableInTouchMode="true"
+            android:text="@string/aHome_title"
+            android:textColor="@color/colorPrimaryDark"
+            android:textSize="@dimen/aHome_tvTitle_textSize"
+            android:fontFamily="@font/heebo_black"/>
 
         <android.support.v4.view.ViewPager
             android:id="@id/aHome_vp"
@@ -54,7 +46,7 @@
                 android:id="@id/aHome_tl"
                 style="@style/AppTheme.TabLayout"
                 android:layout_width="match_parent"
-                android:layout_height="80dp"
+                android:layout_height="@dimen/aHome_tl_height"
                 app:tabLayout_configuration="@{viewModel.tlConfiguration}"
                 app:tabTextAppearance="@style/AppTheme.TabTextAppearance"/>
 

@@ -14,6 +14,7 @@ import android.support.annotation.NonNull;
 import rrzaniolo.iddog.base.TabLayoutConfiguration;
 import rrzaniolo.iddog.base.ViewPagerConfiguration;
 import rrzaniolo.iddog.home.HomeViewModel;
+import rrzaniolo.iddog.home.feed.FeedViewModel;
 import rrzaniolo.iddog.login.LoginViewModel;
 import rrzaniolo.iddog.network.ConsumerService;
 import rrzaniolo.iddog.utils.RxUtils;
@@ -70,6 +71,9 @@ public class ViewModelFactory extends ViewModelProvider.NewInstanceFactory {
                     getApplication(),
                     new ViewPagerConfiguration(),
                     new TabLayoutConfiguration());
+        } else if(modelClass.isAssignableFrom(FeedViewModel.class)){
+            //noinspection unchecked
+            return (T) new FeedViewModel(getApplication());
         }
         throw new IllegalArgumentException("Unknown ViewModel class: " + modelClass.getName());
     }

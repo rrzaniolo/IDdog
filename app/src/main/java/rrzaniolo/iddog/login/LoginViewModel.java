@@ -3,6 +3,7 @@ package rrzaniolo.iddog.login;
 import android.annotation.SuppressLint;
 import android.app.Application;
 import android.arch.lifecycle.AndroidViewModel;
+import android.content.Intent;
 import android.databinding.ObservableField;
 import android.support.annotation.NonNull;
 import android.util.Log;
@@ -15,6 +16,7 @@ import retrofit2.Response;
 import rrzaniolo.iddog.LiveEvents.LoadingDialog;
 import rrzaniolo.iddog.LiveEvents.SnackbarMessage;
 import rrzaniolo.iddog.R;
+import rrzaniolo.iddog.home.HomeActivity;
 import rrzaniolo.iddog.network.ConsumerService;
 import rrzaniolo.iddog.network.IConsumerService;
 import rrzaniolo.iddog.network.JsonObjectUtils;
@@ -186,7 +188,7 @@ public class LoginViewModel extends AndroidViewModel {
     }
 
     private void goToHome(){
-        //TODO:
+        getApplication().startActivity(new Intent(getApplication(), HomeActivity.class));
     }
 
     private void saveUserInfo(User user){

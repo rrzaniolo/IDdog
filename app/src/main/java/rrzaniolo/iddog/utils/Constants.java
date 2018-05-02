@@ -18,5 +18,6 @@ public class Constants {
 
     //region --- Bundle ---
     public static String BUNDLE_LOADING_MESSAGE = "loadingDialogMessage";
+    public static String BUNDLE_CATEGORY_BREED = "categoryBreed";
     //endregion
 }

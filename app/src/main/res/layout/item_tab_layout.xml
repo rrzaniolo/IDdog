@@ -48,7 +48,7 @@
                 android:layout_marginStart="10dp"
                 android:layout_marginBottom="10dp"
                 android:text="@{title}"
-                android:textColor="@{enable ? @color/purplishPink : @color/purple}"
+                android:textColor="@{enable ? @color/purplishBlue : @color/purplishPink}"
                 app:fontFamily="@{enable ? R.font.heebo_extra_bold : R.font.heebo_regular}"
                 tools:text="PlaceHolder" />
 

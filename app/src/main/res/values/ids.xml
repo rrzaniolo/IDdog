@@ -2,20 +2,19 @@
 <resources>
 
     <!-- Login Activity -->
-    <item name="aLogin_tvTitle"         type="id"/>
-    <item name="aLogin_ctilEmail"       type="id"/>
-    <item name="aLogin_tietEmail"       type="id"/>
-    <item name="aLogin_btnLogin"        type="id"/>
+    <item name="aLogin_tvTitle"     type="id"/>
+    <item name="aLogin_ctilEmail"   type="id"/>
+    <item name="aLogin_tietEmail"   type="id"/>
+    <item name="aLogin_btnLogin"    type="id"/>
 
     <!-- Home Activity -->
-    <item name="aHome_rlHeader"         type="id"/>
-    <item name="aHome_tvHeaderLabel"    type="id"/>
-    <item name="aHome_vp"               type="id"/>
-    <item name="aHome_tl"               type="id"/>
+    <item name="aHome_tvTitle"      type="id"/>
+    <item name="aHome_vp"           type="id"/>
+    <item name="aHome_tl"           type="id"/>
 
     <!-- Loading Dialog Fragment -->
-    <item name="dLoading_llLoading"     type="id"/>
-    <item name="dLoading_pbLoading"     type="id"/>
-    <item name="dLoading_tvMessage"     type="id"/>
+    <item name="dLoading_llLoading" type="id"/>
+    <item name="dLoading_pbLoading" type="id"/>
+    <item name="dLoading_tvMessage" type="id"/>
 
 </resources>
