@@ -8,14 +8,12 @@ package rrzaniolo.iddog.network;
 
 import com.google.gson.JsonObject;
 
-import io.reactivex.Observable;
 import retrofit2.Call;
-import retrofit2.Response;
 import retrofit2.http.Body;
 import retrofit2.http.GET;
 import retrofit2.http.POST;
 import retrofit2.http.Query;
-import rrzaniolo.iddog.network.entries.Dogs;
+import rrzaniolo.iddog.network.entries.Feed;
 import rrzaniolo.iddog.network.entries.SignInResponse;
 
 public interface IConsumerService {
@@ -24,5 +22,5 @@ public interface IConsumerService {
     Call<SignInResponse> signIn(@Body JsonObject body);
 
     @GET("feed")
-    Call<Observable<Response<Dogs>>> getFeed(@Query("category") String breed);
+    Call<Feed> getFeed(@Query("category") String breed);
 }

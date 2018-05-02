@@ -201,7 +201,7 @@ public class LoginViewModel extends AndroidViewModel {
 
         }catch(NullPointerException e){
             Log.e(TAG, e.getLocalizedMessage());
-            showSnackbarMessage(R.string.em_apiSignUp);
+            showSnackbarMessage(R.string.em_api);
         }
     }
 
@@ -218,11 +218,11 @@ public class LoginViewModel extends AndroidViewModel {
                             saveUserInfo(checkNotNull(response.body()).getUser());
                         } else {
                             Log.e(TAG, response.message());
-                            showSnackbarMessage(R.string.em_apiSignUp);
+                            showSnackbarMessage(R.string.em_api);
                         }
                     }catch(NullPointerException e){
                         Log.e(TAG, e.getLocalizedMessage());
-                        showSnackbarMessage(R.string.em_apiSignUp);
+                        showSnackbarMessage(R.string.em_api);
                     }
                 }
 
@@ -230,12 +230,12 @@ public class LoginViewModel extends AndroidViewModel {
                 public void onFailure(@NonNull Call<SignInResponse> call, @NonNull Throwable t) {
                     setLoadingDialogVisibility(false);
                     Log.e(TAG, t.getLocalizedMessage());
-                    showSnackbarMessage(R.string.em_apiSignUp);
+                    showSnackbarMessage(R.string.em_api);
                 }
             });
         }catch(NullPointerException e){
             Log.e(TAG, e.getLocalizedMessage());
-            showSnackbarMessage(R.string.em_apiSignUp);
+            showSnackbarMessage(R.string.em_api);
         }
     }
     //endregion

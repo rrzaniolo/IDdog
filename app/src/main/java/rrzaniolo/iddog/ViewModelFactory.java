@@ -73,7 +73,11 @@ public class ViewModelFactory extends ViewModelProvider.NewInstanceFactory {
                     new TabLayoutConfiguration());
         } else if(modelClass.isAssignableFrom(FeedViewModel.class)){
             //noinspection unchecked
-            return (T) new FeedViewModel(getApplication());
+            return (T) new FeedViewModel(
+                    getApplication(),
+                    new ConsumerService(),
+                    ConsumerService.getInstance(getApplication())
+            );
         }
         throw new IllegalArgumentException("Unknown ViewModel class: " + modelClass.getName());
     }

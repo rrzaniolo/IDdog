@@ -8,7 +8,7 @@ import java.util.List;
  * Created by Rodrigo Rodrigues Zaniolo on 4/29/2018.
  * All rights reserved.
  */
-public class Dogs {
+public class Feed {
 
     @SerializedName("category")
     private String category;
@@ -16,9 +16,9 @@ public class Dogs {
     @SerializedName("list")
     private List<String> photos;
 
-    public Dogs() { }
+    public Feed() { }
 
-    public Dogs(String category, List<String> photos) {
+    public Feed(String category, List<String> photos) {
         this.category = category;
         this.photos = photos;
     }

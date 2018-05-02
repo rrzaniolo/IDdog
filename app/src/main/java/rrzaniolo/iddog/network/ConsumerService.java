@@ -22,8 +22,10 @@ import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;
 import rrzaniolo.iddog.BuildConfig;
 import rrzaniolo.iddog.utils.Constants;
+import rrzaniolo.iddog.utils.SharedPreferencesUtils;
 
 import static rrzaniolo.iddog.utils.Preconditions.checkNotNull;
+import static rrzaniolo.iddog.utils.Preconditions.isNotNullNorEmpty;
 
 //import io.reactivex.Observa
 
@@ -142,17 +144,18 @@ public class ConsumerService {
 
     private static class HeaderInterceptor implements Interceptor {
 
-        HeaderInterceptor(Context context) { }
+        private Context context;
+        HeaderInterceptor(Context context) { this.context = context;}
 
         @Override
         public Response intercept(@NonNull Chain chain) throws IOException {
             Request original = chain.request();
 
-            //String idToken = StringUtils.isNotNullOrEmpty(datas.getToken()) ? datas.getToken() : "";
+            String idToken = new SharedPreferencesUtils(context).getString(Constants.USER_TOKEN);
 
             Request request = original.newBuilder()
                     .header("Content-Type", "application/json")
-                    //.header("Authorization", idToken)
+                    .header("Authorization", isNotNullNorEmpty(idToken) ? idToken : "")
                     .method(original.method(), original.body())
                     .build();
 

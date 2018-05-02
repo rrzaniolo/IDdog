@@ -15,10 +15,14 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import rrzaniolo.iddog.LiveEvents.LoadingDialog;
+import rrzaniolo.iddog.LiveEvents.SnackbarMessage;
 import rrzaniolo.iddog.R;
 import rrzaniolo.iddog.ViewModelFactory;
 import rrzaniolo.iddog.databinding.FragmentFeedBinding;
 import rrzaniolo.iddog.utils.Constants;
+import rrzaniolo.iddog.utils.LoadingDialogUtils;
+import rrzaniolo.iddog.utils.SnackbarUtils;
 
 import static rrzaniolo.iddog.utils.Preconditions.checkNotNull;
 
@@ -37,6 +41,7 @@ public class FeedFragment extends Fragment{
     //endregion
 
     //region --- Getters and Setters ---
+    @SuppressWarnings("unused")
     public static FeedFragment newInstance(String breed) {
         if (instance == null){
             instance = new FeedFragment();
@@ -88,6 +93,9 @@ public class FeedFragment extends Fragment{
             getViewModel().configureViewModel(getBreed());
             setUpBinding(inflater, container);
 
+            setUpSnackBar();
+            setUpLoadingDialog();
+
         }catch (NullPointerException e){
             Log.e(TAG, e.getLocalizedMessage());
         }
@@ -98,6 +106,14 @@ public class FeedFragment extends Fragment{
     @Override
     public void setUserVisibleHint(boolean isVisibleToUser) {
         super.setUserVisibleHint(isVisibleToUser);
+
+        if(isVisibleToUser && isAdded()) {
+            try {
+                checkNotNull(getViewModel()).getFeed();
+            } catch (NullPointerException e) {
+                Log.e(TAG, getString(R.string.em_api));
+            }
+        }
     }
     //endregion
 
@@ -106,4 +122,39 @@ public class FeedFragment extends Fragment{
         setBinding(inflater, container);
         getBinding().setViewModel(getViewModel());
     }
+
+    private void setUpSnackBar(){
+        try {
+            checkNotNull(checkNotNull(getViewModel().getSnackbarMessage()))
+                    .observe(FeedFragment.this, (SnackbarMessage.SnackbarObserver) messageResourceId -> {
+                        try {
+                            SnackbarUtils.showSnackbar(checkNotNull(checkNotNull(getBinding()).getRoot()), getString(messageResourceId));
+                        } catch (NullPointerException e) {
+                            Log.e(TAG, e.getLocalizedMessage());
+                        }
+                    });
+        }catch(NullPointerException e){
+            Log.e(TAG, e.getLocalizedMessage());
+        }
+    }
+
+    private void setUpLoadingDialog(){
+        try {
+            checkNotNull(checkNotNull(getViewModel()).getLoadingDialog())
+                    .observe(FeedFragment.this, (LoadingDialog.LoadingDialogObserver) isVisible -> {
+                        try {
+                            LoadingDialogUtils.changeLoadingDialogVisibility(
+                                    checkNotNull(checkNotNull(getBinding()).getRoot()),
+                                    isVisible,
+                                    "",
+                                    checkNotNull(getActivity()).getSupportFragmentManager());
+                        } catch (NullPointerException e) {
+                            Log.e(TAG, e.getLocalizedMessage());
+                        }
+                    });
+        }catch(NullPointerException e){
+            Log.e(TAG, e.getLocalizedMessage());
+        }
+    }
+    //endregion
 }
