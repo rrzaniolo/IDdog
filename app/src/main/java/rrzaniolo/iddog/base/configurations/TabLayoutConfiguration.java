@@ -1,4 +1,4 @@
-package rrzaniolo.iddog.base;
+package rrzaniolo.iddog.base.configurations;
 
 /*
  * Created by rrzaniolo on 01/05/18.

@@ -7,21 +7,26 @@ package rrzaniolo.iddog.utils;
 
 import android.databinding.BindingAdapter;
 import android.graphics.Typeface;
+import android.os.Handler;
 import android.support.annotation.AnimRes;
 import android.support.annotation.FontRes;
 import android.support.design.widget.TabLayout;
 import android.support.design.widget.TextInputLayout;
 import android.support.v4.content.res.ResourcesCompat;
 import android.support.v4.view.ViewPager;
+import android.support.v7.widget.GridLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
-import android.widget.GridView;
 import android.widget.TextView;
 
-import rrzaniolo.iddog.base.GridViewConfiguration;
-import rrzaniolo.iddog.base.TabLayoutConfiguration;
-import rrzaniolo.iddog.base.ViewPagerConfiguration;
+import com.airbnb.lottie.LottieAnimationView;
+
+import rrzaniolo.iddog.base.configurations.LottieViewConfiguration;
+import rrzaniolo.iddog.base.configurations.RecyclerViewConfiguration;
+import rrzaniolo.iddog.base.configurations.TabLayoutConfiguration;
+import rrzaniolo.iddog.base.configurations.ViewPagerConfiguration;
 
 public class BinderAdapterUtils {
 
@@ -63,10 +68,10 @@ public class BinderAdapterUtils {
         tabLayout.addOnTabSelectedListener(tabLayoutConfiguration.getOnTabSelectedListener());
     }
 
-    @BindingAdapter("gridView_configuration")
-    public static void configureGridView(GridView gridView, GridViewConfiguration gridViewConfiguration){
-        gridView.setAdapter(gridViewConfiguration.getAdapter());
-        gridView.setOnItemClickListener(gridViewConfiguration.getClickListener());
+    @BindingAdapter("recycler_configuration")
+    public static void configureRecyclerView(RecyclerView recyclerView, RecyclerViewConfiguration recyclerViewConfiguration){
+        recyclerView.setLayoutManager(new GridLayoutManager(recyclerView.getContext(),4));
+        recyclerView.setAdapter(recyclerViewConfiguration.getAdapter());
     }
 
     @BindingAdapter(value = {"animation", "visibility", "visibilityType"})
@@ -97,5 +102,26 @@ public class BinderAdapterUtils {
     public static void setFontFamily(TextView textView, @FontRes int fontFamily) {
         Typeface typeface = ResourcesCompat.getFont(textView.getContext(), fontFamily);
         textView.setTypeface(typeface);
+    }
+
+    @BindingAdapter("lottieView_configuration")
+    public static void configureLottieView(LottieAnimationView lottieView,
+                                           LottieViewConfiguration lottieViewConfiguration) {
+        lottieView.setAnimation(lottieViewConfiguration.getAnimation());
+        lottieView.loop(lottieViewConfiguration.isLoop());
+
+        if (lottieViewConfiguration.getScale() > 0) {
+            lottieView.setScale(lottieViewConfiguration.getScale());
+        }
+
+        if (lottieViewConfiguration.getSpeed() > 0) {
+            lottieView.setSpeed(lottieViewConfiguration.getSpeed());
+        }
+
+        if (lottieViewConfiguration.getAnimatorListener() != null) {
+            lottieView.addAnimatorListener(lottieViewConfiguration.getAnimatorListener());
+        }
+
+        new Handler().postDelayed(lottieView::playAnimation, lottieViewConfiguration.getStartDelay());
     }
 }

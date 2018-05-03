@@ -4,12 +4,14 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:android="http://schemas.android.com/apk/res/android">
 
+    <data/>
+
     <android.support.constraint.ConstraintLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
 
         <ImageView
-            android:id="@id/cFeed_ivPhoto"
+            android:id="@+id/cFeed_ivPhoto"
             android:layout_width="@dimen/cFeed_ivPhoto_size"
             android:layout_height="@dimen/cFeed_ivPhoto_size"
             android:layout_marginTop="@dimen/cFeed_ivPhoto_margin"

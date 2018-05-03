@@ -5,6 +5,7 @@
 
     <data>
 
+        <import type="android.view.View"/>
         <variable
             name="viewModel"
             type="rrzaniolo.iddog.home.feed.FeedViewModel"/>
@@ -14,8 +15,8 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <GridView
-            android:id="@id/fFeed_gv"
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/fFeed_rv"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_marginTop="@dimen/fFeed_gv_margin"
@@ -28,11 +29,22 @@
             android:numColumns="auto_fit"
             android:stretchMode="columnWidth"
             android:gravity="center"
-            app:gridView_configuration="@{viewModel.gridViewConfiguration}"
+            app:recycler_configuration="@{viewModel.recyclerViewConfiguration}"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"/>
+
+        <com.airbnb.lottie.LottieAnimationView
+            android:id="@+id/fFeed_lav"
+            android:layout_width="256dp"
+            android:layout_height="256dp"
+            android:visibility="@{viewModel.showLoading ? View.VISIBLE : View.GONE}"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:lottieView_configuration="@{viewModel.lottieViewConfiguration}"/>
 
     </android.support.constraint.ConstraintLayout>
 </layout>

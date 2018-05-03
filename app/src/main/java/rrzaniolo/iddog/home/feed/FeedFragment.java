@@ -16,13 +16,11 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import rrzaniolo.iddog.LiveEvents.FeedImage;
-import rrzaniolo.iddog.LiveEvents.LoadingDialog;
 import rrzaniolo.iddog.LiveEvents.SnackbarMessage;
 import rrzaniolo.iddog.R;
 import rrzaniolo.iddog.ViewModelFactory;
 import rrzaniolo.iddog.databinding.FragmentFeedBinding;
 import rrzaniolo.iddog.utils.Constants;
-import rrzaniolo.iddog.utils.LoadingDialogUtils;
 import rrzaniolo.iddog.utils.SnackbarUtils;
 
 import static rrzaniolo.iddog.utils.Preconditions.checkNotNull;
@@ -54,7 +52,7 @@ public class FeedFragment extends Fragment{
         return instance;
     }
 
-    private FragmentFeedBinding getBinding() {
+    FragmentFeedBinding getBinding() {
         return binding;
     }
 
@@ -62,11 +60,11 @@ public class FeedFragment extends Fragment{
         this.binding = DataBindingUtil.inflate(inflater, R.layout.fragment_feed, container, false);
     }
 
-    private FeedViewModel getViewModel() {
+    FeedViewModel getViewModel() {
         return viewModel;
     }
 
-    private void setViewModel() {
+    void setViewModel() {
         this.viewModel = ViewModelFactory.getInstance(checkNotNull(getActivity()).getApplication()).create(FeedViewModel.class);
     }
 
@@ -95,7 +93,6 @@ public class FeedFragment extends Fragment{
             setUpBinding(inflater, container);
 
             setUpSnackBar();
-            setUpLoadingDialog();
             setUpFeedImage();
 
         }catch (NullPointerException e){
@@ -106,26 +103,24 @@ public class FeedFragment extends Fragment{
     }
 
     @Override
-    public void setUserVisibleHint(boolean isVisibleToUser) {
-        super.setUserVisibleHint(isVisibleToUser);
+    public void onResume() {
+        super.onResume();
 
-        if(isVisibleToUser && isAdded()) {
-            try {
-                checkNotNull(getViewModel()).getFeed();
-            } catch (NullPointerException e) {
-                Log.e(TAG, getString(R.string.em_api));
-            }
+        try {
+            checkNotNull(getViewModel()).getFeed();
+        } catch (NullPointerException e) {
+            Log.e(TAG, getString(R.string.em_api));
         }
     }
     //endregion
 
     //region --- Private Methods ---
-    private void setUpBinding(LayoutInflater inflater, ViewGroup container){
+    void setUpBinding(LayoutInflater inflater, ViewGroup container){
         setBinding(inflater, container);
         getBinding().setViewModel(getViewModel());
     }
 
-    private void setUpSnackBar(){
+    void setUpSnackBar(){
         try {
             checkNotNull(checkNotNull(getViewModel().getSnackbarMessage()))
                     .observe(FeedFragment.this, (SnackbarMessage.SnackbarObserver) messageResourceId -> {
@@ -140,26 +135,7 @@ public class FeedFragment extends Fragment{
         }
     }
 
-    private void setUpLoadingDialog(){
-        try {
-            checkNotNull(checkNotNull(getViewModel()).getLoadingDialog())
-                    .observe(FeedFragment.this, (LoadingDialog.LoadingDialogObserver) isVisible -> {
-                        try {
-                            LoadingDialogUtils.changeLoadingDialogVisibility(
-                                    checkNotNull(checkNotNull(getBinding()).getRoot()),
-                                    isVisible,
-                                    "",
-                                    checkNotNull(getActivity()).getSupportFragmentManager());
-                        } catch (NullPointerException e) {
-                            Log.e(TAG, e.getLocalizedMessage());
-                        }
-                    });
-        }catch(NullPointerException e){
-            Log.e(TAG, e.getLocalizedMessage());
-        }
-    }
-
-    private void setUpFeedImage(){
+    void setUpFeedImage(){
         try{
             checkNotNull(checkNotNull(getViewModel()).getFeedImage())
                     .observe(FeedFragment.this, (FeedImage.FeedImageObserver) url -> {

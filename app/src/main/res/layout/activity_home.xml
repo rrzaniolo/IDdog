@@ -19,7 +19,7 @@
         android:background="@color/white">
 
         <TextView
-            android:id="@id/aHome_tvTitle"
+            android:id="@+id/aHome_tvTitle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/aHome_tvTitle_marginTop"
@@ -34,7 +34,7 @@
             android:fontFamily="@font/heebo_black"/>
 
         <android.support.v4.view.ViewPager
-            android:id="@id/aHome_vp"
+            android:id="@+id/aHome_vp"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:background="@color/white"
@@ -43,7 +43,7 @@
             app:viewPager_smoothScroll="@{true}">
 
             <android.support.design.widget.TabLayout
-                android:id="@id/aHome_tl"
+                android:id="@+id/aHome_tl"
                 style="@style/AppTheme.TabLayout"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/aHome_tl_height"

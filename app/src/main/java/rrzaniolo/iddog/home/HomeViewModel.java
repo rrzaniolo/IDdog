@@ -10,9 +10,9 @@ import android.support.v4.app.FragmentManager;
 
 import rrzaniolo.iddog.BR;
 import rrzaniolo.iddog.LiveEvents.OnTabSelected;
-import rrzaniolo.iddog.base.CustomPagerAdapter;
-import rrzaniolo.iddog.base.TabLayoutConfiguration;
-import rrzaniolo.iddog.base.ViewPagerConfiguration;
+import rrzaniolo.iddog.base.adapters.CustomPagerAdapter;
+import rrzaniolo.iddog.base.configurations.TabLayoutConfiguration;
+import rrzaniolo.iddog.base.configurations.ViewPagerConfiguration;
 import rrzaniolo.iddog.data.TabSelectionParameter;
 import rrzaniolo.iddog.home.feed.FeedFragment;
 import rrzaniolo.iddog.utils.Constants;
@@ -78,25 +78,21 @@ public class HomeViewModel extends AndroidViewModel implements TabLayout.OnTabSe
     //endregion
 
     //region --- Private Methods ---
-    private void configCustomAdapter(){
+    private void configureCustomAdapter(){
 
         getCustomPagerAdapter().addFragment(
-//                FeedFragment.newInstance(Constants.CATEGORY_HOUND),
                 newFeed(Constants.CATEGORY_HOUND),
                 Constants.CATEGORY_HOUND
         );
         getCustomPagerAdapter().addFragment(
-//                FeedFragment.newInstance(Constants.CATEGORY_HUSKY),
                 newFeed(Constants.CATEGORY_HUSKY),
                 Constants.CATEGORY_HUSKY
         );
         getCustomPagerAdapter().addFragment(
-//                FeedFragment.newInstance(Constants.CATEGORY_LABRADOR),
                 newFeed(Constants.CATEGORY_LABRADOR),
                 Constants.CATEGORY_LABRADOR
         );
         getCustomPagerAdapter().addFragment(
-//                FeedFragment.newInstance(Constants.CATEGORY_PUG),
                 newFeed(Constants.CATEGORY_PUG),
                 Constants.CATEGORY_PUG
         );
@@ -115,7 +111,7 @@ public class HomeViewModel extends AndroidViewModel implements TabLayout.OnTabSe
     //region Public Methods ---
     public void setUpViewModel(FragmentManager fragmentManager){
         setCustomPagerAdapter(new CustomPagerAdapter(fragmentManager));
-        configCustomAdapter();
+        configureCustomAdapter();
 
         getVpConfiguration().setAdapter(getCustomPagerAdapter());
         vpConfiguration.notifyPropertyChanged(BR.adapter);

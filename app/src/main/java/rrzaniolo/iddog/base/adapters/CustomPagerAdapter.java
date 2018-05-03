@@ -1,4 +1,4 @@
-package rrzaniolo.iddog.base;
+package rrzaniolo.iddog.base.adapters;
 
 /*
  * Created by rrzaniolo on 01/05/18.
@@ -13,6 +13,7 @@ import android.support.v4.app.FragmentManager;
 import java.util.ArrayList;
 import java.util.List;
 
+@SuppressWarnings("unused")
 public class CustomPagerAdapter extends SmartFragmentStatePagerAdapter {
     private List<String> titleList;
     private List<Fragment> fragmentList;
@@ -126,9 +127,6 @@ public class CustomPagerAdapter extends SmartFragmentStatePagerAdapter {
 
     private boolean hasFragment(Fragment f) {
         for (Fragment fragment : fragmentList) {
-//            if (fragment.getClass().isAssignableFrom(f.getClass())) {
-//                return true;
-//            }
             if(fragment.equals(f)){
                 return true;
             }

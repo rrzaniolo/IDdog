@@ -11,9 +11,10 @@ import android.arch.lifecycle.ViewModel;
 import android.arch.lifecycle.ViewModelProvider;
 import android.support.annotation.NonNull;
 
-import rrzaniolo.iddog.base.GridViewConfiguration;
-import rrzaniolo.iddog.base.TabLayoutConfiguration;
-import rrzaniolo.iddog.base.ViewPagerConfiguration;
+import rrzaniolo.iddog.base.configurations.LottieViewConfiguration;
+import rrzaniolo.iddog.base.configurations.RecyclerViewConfiguration;
+import rrzaniolo.iddog.base.configurations.TabLayoutConfiguration;
+import rrzaniolo.iddog.base.configurations.ViewPagerConfiguration;
 import rrzaniolo.iddog.home.HomeViewModel;
 import rrzaniolo.iddog.home.feed.FeedViewModel;
 import rrzaniolo.iddog.login.LoginViewModel;
@@ -76,7 +77,8 @@ public class ViewModelFactory extends ViewModelProvider.NewInstanceFactory {
             //noinspection unchecked
             return (T) new FeedViewModel(
                     getApplication(),
-                    new GridViewConfiguration(),
+                    new RecyclerViewConfiguration(),
+                    new LottieViewConfiguration(),
                     new ConsumerService(),
                     ConsumerService.getInstance(getApplication())
             );

@@ -13,7 +13,6 @@
     </data>
 
     <android.support.constraint.ConstraintLayout
-        android:id="@+id/coordinatorLayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:focusable="true"
@@ -21,7 +20,7 @@
         android:orientation="vertical">
 
         <TextView
-            android:id="@id/aLogin_tvTitle"
+            android:id="@+id/aLogin_tvTitle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/aLogin_tvTitle_marginTop"
@@ -39,7 +38,7 @@
             tools:text="@string/aLogin_title" />
 
         <rrzaniolo.iddog.base.CustomTextInputLayout
-            android:id="@id/aLogin_ctilEmail"
+            android:id="@+id/aLogin_ctilEmail"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/aLogin_ctilEmail_marginTop"
@@ -59,7 +58,7 @@
             tools:errorEnabled="true">
 
             <android.support.design.widget.TextInputEditText
-                android:id="@id/aLogin_tietEmail"
+                android:id="@+id/aLogin_tietEmail"
                 style="@style/AppTheme.EmailTextInputEditText"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -72,7 +71,7 @@
         </rrzaniolo.iddog.base.CustomTextInputLayout>
 
         <Button
-            android:id="@id/aLogin_btnLogin"
+            android:id="@+id/aLogin_btnLogin"
             android:layout_width="wrap_content"
             android:layout_height="0dp"
             android:layout_marginEnd="@dimen/aLogin_btnLogin_marginEnd"
