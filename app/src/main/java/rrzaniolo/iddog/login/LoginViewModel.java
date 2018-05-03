@@ -35,6 +35,10 @@ import static rrzaniolo.iddog.utils.Preconditions.isNotNullNorEmpty;
  * All rights reserved.
  */
 
+/**
+ * ViewModel for the LoginActivity.
+ * */
+@SuppressWarnings("unused")
 public class LoginViewModel extends AndroidViewModel {
 
     //region --- Constants ---
@@ -74,7 +78,7 @@ public class LoginViewModel extends AndroidViewModel {
         return iConsumerService;
     }
 
-    public RxUtils getRxUtils() {
+    private RxUtils getRxUtils() {
         return rxUtils;
     }
 
@@ -110,7 +114,6 @@ public class LoginViewModel extends AndroidViewModel {
         return email;
     }
 
-    @SuppressWarnings("unused")
     public void setEmail(String email) {
         this.email.set(checkNotNull(email));
     }

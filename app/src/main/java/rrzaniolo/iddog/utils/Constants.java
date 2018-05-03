@@ -1,8 +1,12 @@
 package rrzaniolo.iddog.utils;
 
-/**
+/*
  * Created by Rodrigo Rodrigues Zaniolo on 4/29/2018.
  * All rights reserved.
+ */
+
+/**
+ * Class the holds all the App constants.
  */
 public class Constants {
 

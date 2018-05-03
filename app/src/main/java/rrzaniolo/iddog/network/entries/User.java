@@ -4,10 +4,15 @@ import com.google.gson.annotations.SerializedName;
 
 import java.util.Date;
 
-/**
+/*
  * Created by Rodrigo Rodrigues Zaniolo on 4/29/2018.
  * All rights reserved.
  */
+
+/**
+ * Model for the User.
+ */
+@SuppressWarnings("unused")
 public class User {
 
     @SerializedName("_id")

@@ -17,11 +17,14 @@ import rrzaniolo.iddog.utils.SnackbarUtils;
 
 import static rrzaniolo.iddog.utils.Preconditions.checkNotNull;
 
-/**
+/*
  * Created by Rodrigo Rodrigues Zaniolo on 4/28/2018.
  * All rights reserved.
  */
 
+/**
+ * Activity that handles user Login.
+ * */
 public class LoginActivity extends AppCompatActivity {
 
     //region --- Constants ---

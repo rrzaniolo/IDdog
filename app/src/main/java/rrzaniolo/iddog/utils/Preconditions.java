@@ -2,11 +2,14 @@ package rrzaniolo.iddog.utils;
 
 import android.support.annotation.NonNull;
 
-/**
+/*
  * Created by Rodrigo Rodrigues Zaniolo on 4/28/2018.
  * All rights reserved.
  */
 
+/**
+ * Class with methods to validate objects.
+ */
 public final class Preconditions {
     private Preconditions() {}
 
@@ -33,9 +36,6 @@ public final class Preconditions {
 
     public static @NonNull
     Boolean isNotNullNorEmpty(final String toCheck){
-        if(toCheck == null || toCheck.isEmpty())
-            return false;
-        else
-            return true;
+        return toCheck != null && !toCheck.isEmpty();
     }
 }

@@ -11,6 +11,9 @@ import io.reactivex.Observable;
  * All rights reserved.
  */
 
+/**
+ * Class with utility methods for working with Observables.
+ */
 public class RxUtils {
     private static RxUtils instance;
 

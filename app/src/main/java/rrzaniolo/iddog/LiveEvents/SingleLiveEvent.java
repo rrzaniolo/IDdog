@@ -21,6 +21,7 @@ import java.util.concurrent.atomic.AtomicBoolean;
  * Note that only one observer is going to be notified of changes.
  */
 
+@SuppressWarnings("unused")
 public class SingleLiveEvent<T> extends MutableLiveData<T> {
 
     private static final String TAG = "SingleLiveEvent";

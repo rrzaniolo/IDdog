@@ -20,7 +20,10 @@ import rrzaniolo.iddog.LiveEvents.FeedImage;
 import rrzaniolo.iddog.R;
 import rrzaniolo.iddog.databinding.ContentFeedBinding;
 
-public class CustomRecyclerViewAdapter extends RecyclerView.Adapter<CustomRecyclerViewAdapter.ViewHolder>{
+/**
+ * A RecyclerViewAdapter for the FeedFragment.
+ * */
+public class FeedRecyclerViewAdapter extends RecyclerView.Adapter<FeedRecyclerViewAdapter.ViewHolder>{
 
     //region --- Variables ---
     private List<String> feedList;
@@ -48,7 +51,7 @@ public class CustomRecyclerViewAdapter extends RecyclerView.Adapter<CustomRecycl
     //endregion
 
     //region --- Constructors ---
-    public CustomRecyclerViewAdapter(List<String> feedList, FeedImage feedImage) {
+    public FeedRecyclerViewAdapter(List<String> feedList, FeedImage feedImage) {
         setFeedList(feedList);
         setFeedImage(feedImage);
     }
@@ -78,6 +81,9 @@ public class CustomRecyclerViewAdapter extends RecyclerView.Adapter<CustomRecycl
     //endregion
 
     //region --- ViewHolder ---
+    /**
+     * Simple ViewHolder class using DataBinding.
+     * */
     class ViewHolder extends RecyclerView.ViewHolder{
         private ContentFeedBinding binding;
 
@@ -85,7 +91,7 @@ public class CustomRecyclerViewAdapter extends RecyclerView.Adapter<CustomRecycl
             return binding;
         }
 
-        public ViewHolder(View view) {
+        ViewHolder(View view) {
             super(view);
             binding = DataBindingUtil.bind(view);
         }

@@ -4,10 +4,14 @@ import com.google.gson.annotations.SerializedName;
 
 import java.util.List;
 
-/**
+/*
  * Created by Rodrigo Rodrigues Zaniolo on 4/29/2018.
  * All rights reserved.
  */
+
+/**
+ * Model for the Feed.
+ * */
 public class Feed {
 
     @SerializedName("category")

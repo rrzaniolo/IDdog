@@ -15,6 +15,7 @@ import static rrzaniolo.iddog.utils.Preconditions.checkNotNull;
 /**
  * This provides methods to help Activities load their UI.
  */
+@SuppressWarnings("unused")
 public class ActivityUtils {
 
     /**

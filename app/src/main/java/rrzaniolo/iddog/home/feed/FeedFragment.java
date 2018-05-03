@@ -25,6 +25,10 @@ import rrzaniolo.iddog.utils.SnackbarUtils;
 
 import static rrzaniolo.iddog.utils.Preconditions.checkNotNull;
 
+/**
+ * A Fragment that hold all the Feed images from the service. The Fragment has it's own viewModel
+ * and own loading animation.
+ * */
 public class FeedFragment extends Fragment{
 
     //region --- Constants ---

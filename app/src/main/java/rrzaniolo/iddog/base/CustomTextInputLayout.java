@@ -11,6 +11,9 @@ import rrzaniolo.iddog.R;
  * Copyright © 2018 rrzaniolo. All rights reserved.
  */
 
+/**
+ * A TextInputLayout with style already applied.
+ * */
 public class CustomTextInputLayout extends TextInputLayout {
 
     public CustomTextInputLayout(Context context) {

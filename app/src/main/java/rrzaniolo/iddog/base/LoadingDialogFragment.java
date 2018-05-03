@@ -19,8 +19,12 @@ import rrzaniolo.iddog.utils.Constants;
 
 import static rrzaniolo.iddog.utils.Preconditions.checkNotNull;
 
+/**
+ * A DialogFragment with loading animation.
+ * */
 public class LoadingDialogFragment extends DialogFragment {
     //region --- Constants ---
+    @SuppressWarnings("FieldCanBeLocal")
     private final String TAG = "LoadingDialog";
     //endregion
 
@@ -59,7 +63,7 @@ public class LoadingDialogFragment extends DialogFragment {
         super.onActivityCreated(savedInstanceState);
 
         if (getView() != null) {
-            getView().getRootView().setBackgroundColor(ContextCompat.getColor(getActivity(), R.color.transparent));
+            getView().getRootView().setBackgroundColor(ContextCompat.getColor(getView().getContext(), R.color.transparent));
         }
 
         if (getDialog() != null && getDialog().getWindow() != null) {

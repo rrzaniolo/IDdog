@@ -16,6 +16,9 @@ import retrofit2.http.Query;
 import rrzaniolo.iddog.network.entries.Feed;
 import rrzaniolo.iddog.network.entries.SignInResponse;
 
+/**
+ * Interface that hols all API calls signatures.
+ * */
 public interface IConsumerService {
 
     @POST("signup")

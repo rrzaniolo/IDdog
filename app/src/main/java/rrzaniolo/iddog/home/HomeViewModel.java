@@ -22,6 +22,9 @@ import rrzaniolo.iddog.utils.Constants;
  * All rights reserved.
  */
 
+/**
+ * The ViewModel for the HomeActivity.
+ * */
 public class HomeViewModel extends AndroidViewModel implements TabLayout.OnTabSelectedListener{
 
     //region --- Variables ---
@@ -59,10 +62,6 @@ public class HomeViewModel extends AndroidViewModel implements TabLayout.OnTabSe
 
     public ObservableField<Integer> getStartPosition() {
         return startPosition;
-    }
-
-    public void setStartPosition(Integer startPosition) {
-        this.startPosition.set(startPosition);
     }
     //endregion
 

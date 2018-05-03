@@ -19,5 +19,5 @@ public final class JsonObjectUtils {
         JsonObject body = new JsonObject();
         body.addProperty("email", email);
         return body;
-    };
+    }
 }

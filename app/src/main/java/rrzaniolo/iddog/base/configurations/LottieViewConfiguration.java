@@ -12,6 +12,9 @@ import android.support.annotation.RawRes;
 
 import rrzaniolo.iddog.BR;
 
+/**
+ * Class for configuring a LottieView using DataBinding.
+ * */
 @SuppressWarnings("unused")
 public class LottieViewConfiguration extends BaseObservable {
 

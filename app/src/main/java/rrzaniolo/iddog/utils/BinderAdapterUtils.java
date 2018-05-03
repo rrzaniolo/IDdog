@@ -28,6 +28,10 @@ import rrzaniolo.iddog.base.configurations.RecyclerViewConfiguration;
 import rrzaniolo.iddog.base.configurations.TabLayoutConfiguration;
 import rrzaniolo.iddog.base.configurations.ViewPagerConfiguration;
 
+/**
+ * This class hold all teh BindingAdapter methods.
+ */
+@SuppressWarnings("unused")
 public class BinderAdapterUtils {
 
     @BindingAdapter("errorEnabled")

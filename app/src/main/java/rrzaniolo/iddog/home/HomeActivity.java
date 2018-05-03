@@ -20,6 +20,10 @@ import static rrzaniolo.iddog.utils.Preconditions.checkNotNull;
  * All rights reserved.
  */
 
+/**
+ * Activity With a ViewPager responsible for displaying a FeedFragment for each Breed on on the API.
+ * the Activity will have a different Fragment for each Breed instead of reusing the same Fragment.
+ */
 public class HomeActivity extends AppCompatActivity {
 
     //region --- Constants ---
@@ -69,6 +73,7 @@ public class HomeActivity extends AppCompatActivity {
     private void setUpBiding(){
         setBinding();
         getBinding().setViewModel(getViewModel());
+        getBinding().aHomeVp.setOffscreenPageLimit(3);
     }
 
     private void setUpOnTabSelected(){

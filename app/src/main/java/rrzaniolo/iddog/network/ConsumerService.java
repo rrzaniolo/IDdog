@@ -29,10 +29,14 @@ import static rrzaniolo.iddog.utils.Preconditions.isNotNullNorEmpty;
 
 //import io.reactivex.Observa
 
-/**
+/*
  * Created by Rodrigo Rodrigues Zaniolo on 4/29/2018.
  * All rights reserved.
  */
+
+/**
+ * Class responsible for handling Internet connection and API calls.
+ * */
 public class ConsumerService {
 
     //region --- Constants ---
@@ -49,7 +53,7 @@ public class ConsumerService {
     public ConsumerService() { }
     //endregion
 
-    /* Private Methods. */
+    //region --- Private Methods ---
     private static OkHttpClient getOkHttpClient(Context context){
         if(okHttpClient == null) {
             synchronized (RequestManager.class) {
@@ -97,14 +101,15 @@ public class ConsumerService {
 
         return retrofit;
     }
+    //endregion
 
+    //region --- Public Methods ---
     public static synchronized IConsumerService getInstance(Context context) {
         if (iConsumerServiceAPI == null)
             iConsumerServiceAPI = getRetrofit(context).create(IConsumerService.class);
 
         return iConsumerServiceAPI;
     }
-    /* Public Method. */
 
     /**
      * Check for internet availability.
@@ -122,6 +127,7 @@ public class ConsumerService {
             return false;
         }
     }
+    //endregion
 
     //region --- Interceptors ---
     private static class LoggingInterceptor implements Interceptor {

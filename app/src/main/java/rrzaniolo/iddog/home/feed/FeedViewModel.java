@@ -20,7 +20,7 @@ import retrofit2.Response;
 import rrzaniolo.iddog.LiveEvents.FeedImage;
 import rrzaniolo.iddog.LiveEvents.SnackbarMessage;
 import rrzaniolo.iddog.R;
-import rrzaniolo.iddog.base.adapters.CustomRecyclerViewAdapter;
+import rrzaniolo.iddog.base.adapters.FeedRecyclerViewAdapter;
 import rrzaniolo.iddog.base.configurations.LottieViewConfiguration;
 import rrzaniolo.iddog.base.configurations.RecyclerViewConfiguration;
 import rrzaniolo.iddog.network.ConsumerService;
@@ -29,6 +29,9 @@ import rrzaniolo.iddog.network.entries.Feed;
 
 import static rrzaniolo.iddog.utils.Preconditions.checkNotNull;
 
+/**
+ * The ViewModel for the FeedFragment.
+ * */
 public class FeedViewModel extends AndroidViewModel{
 
     //region --- Constants ---
@@ -42,7 +45,7 @@ public class FeedViewModel extends AndroidViewModel{
 
     private LottieViewConfiguration lottieViewConfiguration;
     private RecyclerViewConfiguration recyclerViewConfiguration;
-    private CustomRecyclerViewAdapter adapter;
+    private FeedRecyclerViewAdapter adapter;
 
     private String breed = "";
     private Boolean hasFeed = false;
@@ -71,19 +74,15 @@ public class FeedViewModel extends AndroidViewModel{
         return lottieViewConfiguration;
     }
 
-    public void setLottieViewConfiguration(LottieViewConfiguration lottieViewConfiguration) {
-        this.lottieViewConfiguration = lottieViewConfiguration;
-    }
-
     public RecyclerViewConfiguration getRecyclerViewConfiguration() {
         return recyclerViewConfiguration;
     }
 
-    public CustomRecyclerViewAdapter getAdapter() {
+    public FeedRecyclerViewAdapter getAdapter() {
         return adapter;
     }
 
-    public void setAdapter(CustomRecyclerViewAdapter adapter) {
+    public void setAdapter(FeedRecyclerViewAdapter adapter) {
         this.adapter = adapter;
     }
 
@@ -107,7 +106,7 @@ public class FeedViewModel extends AndroidViewModel{
         return showLoading;
     }
 
-    public void setShowLoading(Boolean showLoading) {
+    private void setShowLoading(Boolean showLoading) {
         this.showLoading.set(showLoading);
     }
     //endregion
@@ -130,7 +129,7 @@ public class FeedViewModel extends AndroidViewModel{
 
     //region --- Private Methods ---
     private void configureRecyclerView(){
-        setAdapter(new CustomRecyclerViewAdapter(new ArrayList<>(), feedImage));
+        setAdapter(new FeedRecyclerViewAdapter(new ArrayList<>(), feedImage));
         getRecyclerViewConfiguration().setAdapter(getAdapter());
     }
     private void configureLottieView(){

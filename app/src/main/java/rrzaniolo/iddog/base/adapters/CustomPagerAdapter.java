@@ -13,6 +13,10 @@ import android.support.v4.app.FragmentManager;
 import java.util.ArrayList;
 import java.util.List;
 
+
+/**
+ * Simple custom SmartFragmentStatePagerAdapter.
+ * */
 @SuppressWarnings("unused")
 public class CustomPagerAdapter extends SmartFragmentStatePagerAdapter {
     private List<String> titleList;
@@ -47,7 +51,7 @@ public class CustomPagerAdapter extends SmartFragmentStatePagerAdapter {
 
     @Override
     public int getItemPosition(@NonNull Object object) {
-        /* Redraw all Fragments except the current one, when the fragment is marked as Pinned */
+        // Redraw all Fragments except the current one, when the fragment is marked as Pinned.
         return getPinnedFragment() != null &&
                 object.getClass().getName().equalsIgnoreCase(getPinnedFragment().getClass().getName()) ?
                 POSITION_UNCHANGED :

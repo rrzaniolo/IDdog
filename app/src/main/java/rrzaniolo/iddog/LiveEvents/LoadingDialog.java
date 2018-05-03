@@ -6,9 +6,7 @@ package rrzaniolo.iddog.LiveEvents;
  */
 
 import android.arch.lifecycle.LifecycleOwner;
-import android.arch.lifecycle.Observer;
 import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
 
 /**
  * A rrzaniolo.iddog.LiveEvents.SingleLiveEvent used for displaying a LoadingDialog (or animation).
@@ -19,14 +17,11 @@ import android.support.annotation.Nullable;
  */
 public class LoadingDialog extends SingleLiveEvent<Boolean> {
     public void observe(LifecycleOwner owner, final LoadingDialogObserver observer) {
-        super.observe(owner, new Observer<Boolean>() {
-            @Override
-            public void onChanged(@Nullable Boolean isVisible) {
-                if (isVisible == null) {
-                    return;
-                }
-                observer.onVisibilityChange(isVisible);
+        super.observe(owner, isVisible -> {
+            if (isVisible == null) {
+                return;
             }
+            observer.onVisibilityChange(isVisible);
         });
     }
 

@@ -12,9 +12,11 @@ import android.content.SharedPreferences;
  * Class with methods to store and retrieve information from
  * user shared preferences.
  * */
+@SuppressWarnings("unused")
 public class SharedPreferencesUtils {
 
     //region --- Constants ---
+    @SuppressWarnings("FieldCanBeLocal")
     private final String PREF_NAME = "userPreferences";
     //endregion
 

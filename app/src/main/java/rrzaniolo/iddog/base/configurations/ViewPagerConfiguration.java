@@ -15,6 +15,7 @@ import rrzaniolo.iddog.BR;
 /**
  * Class to configure a ViewPager using DataBinding.
  * */
+@SuppressWarnings("unused")
 public class ViewPagerConfiguration extends BaseObservable {
 
     //region --- Variables ---

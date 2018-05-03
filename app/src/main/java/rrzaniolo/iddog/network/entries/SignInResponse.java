@@ -2,11 +2,15 @@ package rrzaniolo.iddog.network.entries;
 
 import com.google.gson.annotations.SerializedName;
 
-/**
+/*
  * Created by rrzaniolo on 30/04/18.
  * Copyright © 2018 rrzaniolo. All rights reserved.
  */
 
+/**
+ * Model for the Response of the SignIn.
+ * */
+@SuppressWarnings("unused")
 public class SignInResponse {
 
     @SerializedName("user")
