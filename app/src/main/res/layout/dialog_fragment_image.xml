@@ -1,0 +1,44 @@
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context=".base.LoadingDialogFragment" >
+
+    <data>
+        <import type="android.view.View" />
+        <import type="rrzaniolo.iddog.utils.Preconditions" />
+
+        <variable
+            name="showLoading"
+            type="android.databinding.ObservableBoolean"/>
+
+        <variable
+            name="configuration"
+            type="rrzaniolo.iddog.base.configurations.LottieViewConfiguration"/>
+    </data>
+
+    <LinearLayout
+        android:id="@+id/dImage_ll"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:gravity="center"
+        android:background="@color/transparent"
+        style="@style/AppTheme.RelativeLayout.DialogFragment.Loading">
+
+        <ImageView
+            android:id="@+id/dImage_iv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:visibility="@{showLoading ? View.INVISIBLE : View.VISIBLE}" />
+
+        <com.airbnb.lottie.LottieAnimationView
+            android:id="@+id/dImage_lav"
+            android:layout_width="@dimen/cFeed_lav_size"
+            android:layout_height="@dimen/cFeed_lav_size"
+            android:visibility="@{showLoading ? View.VISIBLE : View.GONE}"
+            app:lottie_colorFilter="@color/purple"
+            app:lottieView_configuration="@{configuration}"/>
+
+    </LinearLayout>
+</layout>
+

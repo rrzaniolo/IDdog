@@ -84,11 +84,11 @@ public class HomeActivity extends AppCompatActivity {
                             checkNotNull(parameter);
                             setSelectedTabLayout(checkNotNull(parameter.getTab()), checkNotNull(parameter.getState()));
                         }catch (NullPointerException e){
-                            Log.e(TAG, e.getLocalizedMessage());
+                            Log.e(TAG, e.getLocalizedMessage() != null ? e.getLocalizedMessage() : "");
                         }
                     });
         }catch (NullPointerException e){
-            Log.e(TAG, e.getLocalizedMessage());
+            Log.e(TAG, e.getLocalizedMessage() != null ? e.getLocalizedMessage() : "");
         }
     }
 

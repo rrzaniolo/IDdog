@@ -78,11 +78,11 @@ public class LoginActivity extends AppCompatActivity {
                         try {
                             SnackbarUtils.showSnackbar(checkNotNull(checkNotNull(getBinding()).getRoot()), getString(messageResourceId));
                         } catch (NullPointerException e) {
-                            Log.e(TAG, e.getLocalizedMessage());
+                            Log.e(TAG, e.getLocalizedMessage() != null ? e.getLocalizedMessage() : "");
                         }
                     });
         }catch(NullPointerException e){
-            Log.e(TAG, e.getLocalizedMessage());
+            Log.e(TAG, e.getLocalizedMessage() != null ? e.getLocalizedMessage() : "");
         }
     }
 
@@ -99,12 +99,12 @@ public class LoginActivity extends AppCompatActivity {
                                 "",
                                 getSupportFragmentManager());
                     } catch (NullPointerException e) {
-                        Log.e(TAG, e.getLocalizedMessage());
+                        Log.e(TAG, e.getLocalizedMessage() != null ? e.getLocalizedMessage() : "");
                     }
                 }
             });
         }catch(NullPointerException e){
-            Log.e(TAG, e.getLocalizedMessage());
+            Log.e(TAG, e.getLocalizedMessage() != null ? e.getLocalizedMessage() : "");
         }
     }
     //endregion

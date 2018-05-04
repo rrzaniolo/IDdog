@@ -21,6 +21,7 @@ import rrzaniolo.iddog.R;
 import rrzaniolo.iddog.ViewModelFactory;
 import rrzaniolo.iddog.databinding.FragmentFeedBinding;
 import rrzaniolo.iddog.utils.Constants;
+import rrzaniolo.iddog.utils.ImageDialogUtils;
 import rrzaniolo.iddog.utils.SnackbarUtils;
 
 import static rrzaniolo.iddog.utils.Preconditions.checkNotNull;
@@ -100,7 +101,7 @@ public class FeedFragment extends Fragment{
             setUpFeedImage();
 
         }catch (NullPointerException e){
-            Log.e(TAG, e.getLocalizedMessage());
+            Log.e(TAG, e.getLocalizedMessage() != null ? e.getLocalizedMessage() : "");
         }
 
         return getBinding().getRoot();
@@ -131,11 +132,11 @@ public class FeedFragment extends Fragment{
                         try {
                             SnackbarUtils.showSnackbar(checkNotNull(checkNotNull(getBinding()).getRoot()), getString(messageResourceId));
                         } catch (NullPointerException e) {
-                            Log.e(TAG, e.getLocalizedMessage());
+                            Log.e(TAG, e.getLocalizedMessage() != null ? e.getLocalizedMessage() : "");
                         }
                     });
         }catch(NullPointerException e){
-            Log.e(TAG, e.getLocalizedMessage());
+            Log.e(TAG, e.getLocalizedMessage() != null ? e.getLocalizedMessage() : "");
         }
     }
 
@@ -144,13 +145,18 @@ public class FeedFragment extends Fragment{
             checkNotNull(checkNotNull(getViewModel()).getFeedImage())
                     .observe(FeedFragment.this, (FeedImage.FeedImageObserver) url -> {
                         try {
-                            String imageUrl = url;
+                            ImageDialogUtils.changeImageDialogVisibility(
+                                    checkNotNull(getBinding()).getRoot(),
+                                    true,
+                                    url,
+                                    checkNotNull(getActivity()).getSupportFragmentManager()
+                            );
                         } catch (NullPointerException e) {
-                            Log.e(TAG, e.getLocalizedMessage());
+                            Log.e(TAG, e.getLocalizedMessage() != null ? e.getLocalizedMessage() : "");
                         }
                     });
         }catch(NullPointerException e){
-            Log.e(TAG, e.getLocalizedMessage());
+            Log.e(TAG, e.getLocalizedMessage() != null ? e.getLocalizedMessage() : "");
         }
     }
     //endregion

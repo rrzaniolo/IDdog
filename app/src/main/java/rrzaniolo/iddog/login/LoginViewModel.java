@@ -203,7 +203,7 @@ public class LoginViewModel extends AndroidViewModel {
             goToHome();
 
         }catch(NullPointerException e){
-            Log.e(TAG, e.getLocalizedMessage());
+            Log.e(TAG, e.getLocalizedMessage() != null ? e.getLocalizedMessage() : "");
             showSnackbarMessage(R.string.em_api);
         }
     }
@@ -224,7 +224,7 @@ public class LoginViewModel extends AndroidViewModel {
                             showSnackbarMessage(R.string.em_api);
                         }
                     }catch(NullPointerException e){
-                        Log.e(TAG, e.getLocalizedMessage());
+                        Log.e(TAG, e.getLocalizedMessage() != null ? e.getLocalizedMessage() : "");
                         showSnackbarMessage(R.string.em_api);
                     }
                 }
@@ -237,7 +237,7 @@ public class LoginViewModel extends AndroidViewModel {
                 }
             });
         }catch(NullPointerException e){
-            Log.e(TAG, e.getLocalizedMessage());
+            Log.e(TAG, e.getLocalizedMessage() != null ? e.getLocalizedMessage() : "");
             showSnackbarMessage(R.string.em_api);
         }
     }

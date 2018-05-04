@@ -4,7 +4,13 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <data/>
+    <data>
+        <import type="android.view.View"/>
+
+        <variable
+            name="viewHolder"
+            type="rrzaniolo.iddog.base.adapters.FeedRecyclerViewAdapter.ViewHolder"/>
+    </data>
 
     <android.support.constraint.ConstraintLayout
         android:layout_width="wrap_content"
@@ -19,10 +25,23 @@
             android:layout_marginStart="@dimen/cFeed_ivPhoto_margin"
             android:layout_marginEnd="@dimen/cFeed_ivPhoto_margin"
             android:scaleType="centerInside"
+            android:visibility="@{viewHolder.showLoading ? View.INVISIBLE : View.VISIBLE}"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             tools:ignore="ContentDescription" />
+
+        <com.airbnb.lottie.LottieAnimationView
+            android:id="@+id/cFeed_lav"
+            android:layout_width="@dimen/cFeed_ivPhoto_size"
+            android:layout_height="@dimen/cFeed_ivPhoto_size"
+            android:visibility="@{viewHolder.showLoading ? View.VISIBLE : View.GONE}"
+            app:lottie_colorFilter="@color/purple"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:lottieView_configuration="@{viewHolder.configuration}"/>
     </android.support.constraint.ConstraintLayout>
 </layout>

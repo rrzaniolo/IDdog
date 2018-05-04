@@ -34,6 +34,8 @@
     <dimen name="fFeed_gv_spacingH">4dp</dimen>
     <dimen name="fFeed_gv_spacingV">4dp</dimen>
 
+    <dimen name="cFeed_lav_size">256dp</dimen>
+
     <!-- Content Feed -->
     <dimen name="cFeed_ivPhoto_margin">0dp</dimen>
     <dimen name="cFeed_ivPhoto_size">64dp</dimen>

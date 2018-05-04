@@ -157,7 +157,7 @@ public class FeedViewModel extends AndroidViewModel{
                         configureRecyclerView(checkNotNull(response.body()).getPhotos());
                         setHasFeed(true);
                     }catch (NullPointerException e){
-                        Log.e(TAG, e.getLocalizedMessage());
+                        Log.e(TAG, e.getLocalizedMessage() != null ? e.getLocalizedMessage() : "");
                         showSnackbarMessage(R.string.em_api);
                     }
                 }
@@ -171,7 +171,7 @@ public class FeedViewModel extends AndroidViewModel{
                 }
             });
         }catch (NullPointerException e){
-            Log.e(TAG, e.getLocalizedMessage());
+            Log.e(TAG, e.getLocalizedMessage() != null ? e.getLocalizedMessage() : "");
             showSnackbarMessage(R.string.em_api);
         }
     }

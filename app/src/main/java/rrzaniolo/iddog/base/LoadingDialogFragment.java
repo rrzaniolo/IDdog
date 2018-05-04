@@ -44,7 +44,7 @@ public class LoadingDialogFragment extends DialogFragment {
             checkNotNull(getDialog().getWindow()).requestFeature(Window.FEATURE_NO_TITLE);
              message = checkNotNull(getArguments()).getString(Constants.BUNDLE_LOADING_MESSAGE, "");
         }catch (NullPointerException e){
-            Log.e(TAG, e.getLocalizedMessage());
+            Log.e(TAG, e.getLocalizedMessage() != null ? e.getLocalizedMessage() : "");
             message = "";
         }
 
@@ -62,12 +62,11 @@ public class LoadingDialogFragment extends DialogFragment {
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
 
-        if (getView() != null) {
-            getView().getRootView().setBackgroundColor(ContextCompat.getColor(getView().getContext(), R.color.transparent));
-        }
-
-        if (getDialog() != null && getDialog().getWindow() != null) {
-            getDialog().getWindow().setBackgroundDrawableResource(R.color.transparent);
+        try {
+            checkNotNull(getView()).getRootView().setBackgroundColor(ContextCompat.getColor(getView().getContext(), R.color.transparent));
+            checkNotNull(checkNotNull(getDialog()).getWindow()).setBackgroundDrawableResource(R.color.transparent);
+        }catch (NullPointerException e){
+            Log.e(TAG, e.getLocalizedMessage() != null ? e.getLocalizedMessage() : "");
         }
     }
     //endregion

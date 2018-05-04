@@ -123,7 +123,7 @@ public class ConsumerService {
 
             return checkNotNull(networkInfo).isConnectedOrConnecting();
         }catch (NullPointerException e){
-            Log.e(TAG, e.getLocalizedMessage());
+            Log.e(TAG, e.getLocalizedMessage() != null ? e.getLocalizedMessage() : "");
             return false;
         }
     }
